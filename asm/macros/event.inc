@@ -2330,3 +2330,11 @@
 	waitmoncry
 	dowildbattle
 	.endm
+
+	@ Sets a variable object event to an overworld mon for a wild encounter.
+	.macro setobjectaswildencounter localId:req, encounterType=ENCOUNTER_FIXED
+	.byte 0xe5
+	.2byte \localId
+	.byte \encounterType
+	release
+	.endm
