@@ -4,7 +4,7 @@ Based off RHH's pokeemerald-expansion 1.9.2 https://github.com/rh-hideout/pokeem
 ```
 These are some of the tools I've made for my hack, aiming to provide a framework to develop your own overworld encounter feature. These rely heavily on **merrp**'s followers branch, so credit goes to them as well as the maintainers who have been recently added it to **pokeemerald-expansion**.
 
-> **Note**: This branch tracks **pret**'s **pokeemerald**. Please cherry-pick the linked commits directly.
+> **Note**: This branch tracks **pret**'s **pokeemerald**. Please cherry-pick the linked commits or copy them directly.
 
 ## Features
 - [x] Create a wander in grass movement type for overworld encounters. (Found [here](https://github.com/Pawkkie/Team-Aquas-Asset-Repo/wiki/Create-Wander-in-Grass-Movement-Type))
@@ -15,8 +15,13 @@ These are some of the tools I've made for my hack, aiming to provide a framework
 ### Example - Petalburg Good Rod Encounters
 ![](https://github.com/HashtagMarky/pokeemerald/blob/ikigai/ow-encounters/ikiagi_ow_encounters.gif)
 
+#### .inc format
 ```
 .set LOCALID_OW_MON 1
+
+PetalburgCity_MapScripts::
+    map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_OnTransition
+    .byte 0
 
 PetalburgCity_OnTransition:
     … … …
@@ -33,6 +38,33 @@ PetalburgCity_EventScript_OverworldMon::
     release
     end
 ```
+
+#### .pory format
+```
+const LOCALID_OW_MON = 1
+
+mapscript PetalburgCity_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION: PetalburgCity_OnTransition
+}
+
+script PetalburgCity_OnTransition
+{
+    setobjectaswildencounter(LOCALID_OW_MON, ENCOUNTER_GOOD_ROD)
+}
+
+PetalburgCity_EventScript_OverworldMon::
+    lock
+    callnative(GetOverworldMonSpecies)
+    bufferspeciesname(STR_VAR_1, VAR_0x8004)
+    msgbox(PetalburgCity_Text_OverworldMon, MSGBOX_DEFAULT)
+    closemessage
+    startoverworldencounter(5)
+    release
+    end
+```
+
+For help setting up mapscripts, please see the [Team Aqua's Hideout Video Tutorial](https://youtu.be/b7AQP6WND-4?si=7q06ybC2k65GkQI6), and if you need it, the [poryscript guide](https://github.com/huderlem/poryscript#mapscripts-statement).
 
 ## Commits
 ### Start Overworld Encounters & Get Overworld Species
