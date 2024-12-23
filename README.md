@@ -7,8 +7,8 @@ These are some of the tools I've made for my hack, aiming to provide a framework
 > **Note**: This branch tracks **pret**'s **pokeemerald**. Please cherry-pick the linked commits or copy them directly.
 
 ## Features
-- [x] Create a wander in grass movement type for overworld encounters. (Found [here](https://github.com/Pawkkie/Team-Aquas-Asset-Repo/wiki/Create-Wander-in-Grass-Movement-Type))
-- [x] Create a way to start a wild encounter based on an overworld mon object event, without having to specify the spcies in a script.
+- [x] Create a wander in grass movement type for overworld encounters. [Found here](https://github.com/Pawkkie/Team-Aquas-Asset-Repo/wiki/Create-Wander-in-Grass-Movement-Type).
+- [x] Create a way to start a wild encounter based on an overworld mon object event, without having to specify the species in a script.
 - [x] Create a way to specify the species of an overworld mon object event from a list of species.
 - [x] Create a way to specify the species of an overworld mon object event from map wild encounter headers.
 
@@ -79,11 +79,12 @@ dowildbattle
 .endm
 ```
 
-This commit adds a function that sets `VAR_0x8004` to a species based on an object event and `VAR_8005` to it's shinyness. If the object event isn't tied to a sepcies, it returns `SPECIES_NONE`, however this can be changed very easily. This function can be called in the `startoverworldencounter` which plays the relevant species cry before starting a wild encounter.
+This commit adds a function that sets `VAR_0x8004` to a species based on an object event and `VAR_8005` to it's shinyness. If the object event isn't tied to a species, it returns `SPECIES_NONE`, however this can be changed very easily. This function can be called in the `startoverworldencounter` macro which plays the relevant species cry before starting a wild encounter.
 
-> **Note**: There is a known bug that I haven't yet squashed where adding a value an objects Sight Radius / Berry Tree ID may cause a species value to not be obtained correctly.
+> **Note**: ~~There is a known bug that I haven't yet squashed where adding a value an objects Sight Radius / Berry Tree ID may cause a species value to not be obtained correctly.~~ This function that caused this bug was removed in `pokeemerald-expansion 1.10.0`. [This was pull request that removed it](https://github.com/rh-hideout/pokeemerald-expansion/pull/5475).
 
-October 3rd 2024: [de53fa5e2d](https://github.com/HashtagMarky/pokeemerald/commit/de53fa5e2d1e46efe09e1d829137d030be81d402)
+#### October 3rd 2024
+[Commit: de53fa5e2d](https://github.com/HashtagMarky/pokeemerald/commit/de53fa5e2d1e46efe09e1d829137d030be81d402)
 
 ### Set Object as Wild Encounter
 Sets a variable object event to an overworld mon for a wild encounter.
@@ -109,7 +110,8 @@ This commits adds a few functions in order to change a variable object event int
 
 > **Note**: I haven't played around with variable object events too much, and these may not play too nicely everywhere in vanilla as they are set at various points.
 
-October 4th 2024: [28156b0b5f](https://github.com/HashtagMarky/pokeemerald/commit/28156b0b5fa6933f42c5673026d046d5e6c2e566)
+#### October 4th 2024
+[Commit: 28156b0b5f](https://github.com/HashtagMarky/pokeemerald/commit/28156b0b5fa6933f42c5673026d046d5e6c2e566)
 
 ## Further Work
 My own implementation of dedicated overworld encounters feature is still a giant WIP, but if I make any updates on these tools or develop any others I will update this page. If you find any bugs, or even have any fixes, please feel free to submit a PR or ping me (HashtagMarky) a message on the TAH Discord.  
