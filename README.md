@@ -10,7 +10,7 @@ These are some of the tools I've made for my hack, aiming to provide a framework
 - [x] Create a wander in grass movement type for overworld encounters. [Found here](https://github.com/Pawkkie/Team-Aquas-Asset-Repo/wiki/Create-Wander-in-Grass-Movement-Type).
 - [x] Create a way to start a wild encounter based on an overworld mon object event, without having to specify the species in a script.
 - [x] Create a way to specify the species of an overworld mon object event from a list of species.
-- [x] Create a way to specify the species of an overworld mon object event from map wild encounter headers.
+- [x] Create a way to specify the species of an overworld mon object event from map wild encounter tables.
 
 ### Example - Petalburg Good Rod Encounters
 ![](https://github.com/HashtagMarky/pokeemerald/blob/ikigai/ow-encounters/ikiagi_ow_encounters.gif)
@@ -78,16 +78,16 @@ dowildbattle
 .endm
 ```
 
-This commit adds a function that sets `VAR_0x8004` to a species based on an object event and `VAR_8005` to it's shinyness. If the object event isn't tied to a species, it returns `SPECIES_NONE`, however this can be changed very easily. This function can be called in the `startoverworldencounter` macro which plays the relevant species cry before starting a wild encounter.
+This commit adds a function, `GetOverworldMonSpecies`, that sets `VAR_0x8004` to a species based on the last selected object event and `VAR_8005` to it's shinyness. If the object event isn't tied to a species, it returns `SPECIES_NONE`, however this can be changed very easily. `GetOverworldMonSpecies` can be called at any point in a `.inc`/`.pory` scripts though `callnative GetOverworldMonSpecies`/`callnative(GetOverworldMonSpecies)` or normally in C. It is used in the `startoverworldencounter` macro which plays the relevant species cry before starting a wild encounter.
 
-> **Note**: ~~There is a known bug that I haven't yet squashed where adding a value an objects Sight Radius / Berry Tree ID may cause a species value to not be obtained correctly.~~ This function that caused this bug was removed in `pokeemerald-expansion 1.10.0`. [This was pull request that removed it](https://github.com/rh-hideout/pokeemerald-expansion/pull/5475).
+> **Note**: ~~There is a known bug that I haven't yet squashed where adding a value an objects Sight Radius / Berry Tree ID may cause a species value to not be obtained correctly.~~ The function that caused this bug was removed in `pokeemerald-expansion 1.10.0`. [This was pull request that removed it](https://github.com/rh-hideout/pokeemerald-expansion/pull/5475).
 
 #### October 3rd 2024
 [Commit: de53fa5e2d](https://github.com/HashtagMarky/pokeemerald/commit/de53fa5e2d1e46efe09e1d829137d030be81d402)
 
 ---
 ### Set Object as Wild Encounter
-Sets a variable object event to an overworld mon for a wild encounter.
+Sets a variable object event to an overworld mon for a wild encounter. It should be noted, even though `.byte 0xe5` was used, you should change it to the next free value in `gScriptCmdTable` found in `scr_cmd_table.inc`.
 ```
 #define ENCOUNTER_FIXED         0
 #define ENCOUNTER_LAND          1
