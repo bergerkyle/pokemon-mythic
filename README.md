@@ -24,7 +24,6 @@ PetalburgCity_MapScripts::
     .byte 0
 
 PetalburgCity_OnTransition:
-    … … …
     setobjectaswildencounter LOCALID_OW_MON, ENCOUNTER_GOOD_ROD
     end
 
@@ -86,6 +85,7 @@ This commit adds a function that sets `VAR_0x8004` to a species based on an obje
 #### October 3rd 2024
 [Commit: de53fa5e2d](https://github.com/HashtagMarky/pokeemerald/commit/de53fa5e2d1e46efe09e1d829137d030be81d402)
 
+---
 ### Set Object as Wild Encounter
 Sets a variable object event to an overworld mon for a wild encounter.
 ```
@@ -105,10 +105,15 @@ Sets a variable object event to an overworld mon for a wild encounter.
 release
 .endm
 ```
+![Variable Object Event Usage Example](https://github.com/user-attachments/assets/6fa37858-f964-4916-8d35-c973f570b269)
 
-This commits adds a few functions in order to change a variable object event into a species ready for an overworld encounter. By setting the encounter type to `ENCOUNTER_FIXED`, the species will be set using the function `ReturnFixedSpeciesEncounter`. This can be supplemented by adding to the switch statement, potentially with random chances or even by using map headers to determine encounters by map section or type. Using any other type will return a random species from the relevant encounter tables used. This also uses `SPAWN_ODDS` to define whether or not the object should be shown by setting it's flag. Objects are set to always spawn by default, but if you would like to decrease these odds, I would recommend giving the object temporary flags in order to allow them a new chance to spawn when transitioning to the map again.
+This commit adds a few functions in order to change a variable object event into a species ready for an overworld encounter, by using the `setobjectaswildencounter` macro. The called function will read the object associated with the `localId` that is given, checking if it is a variable object event. If this check is passed, the variable associated with it is automatically set to allow for an overworld species to spawn.
 
-> **Note**: I haven't played around with variable object events too much, and these may not play too nicely everywhere in vanilla as they are set at various points.
+By setting the encounter type to `ENCOUNTER_FIXED`, the species will be set using the function `ReturnFixedSpeciesEncounter`. This can be supplemented by adding to the switch statement, potentially with random chances or even by using map headers to determine encounters by map section or type. Using any other type will return a random species from the relevant encounter tables used.
+
+This also uses `SPAWN_ODDS` to define whether or not the object should be shown by setting it's flag. Objects are set to always spawn by default, but if you would like to decrease these odds, I would recommend giving the object temporary flags in order to allow them a new chance to spawn when transitioning to the map again. This also allows encounters to be removed after battle, and have a chance to respawn after leaving the area.
+
+> **Note**: I haven't played around with variable object events too much, and these may not play too nicely everywhere in vanilla as they are set at various points. The script `Common_EventScript_SetupRivalGfxId` is one way this is done, setting `VAR_OBJ_GFX_ID_0` and `VAR_OBJ_GFX_ID_3` when transitioning to many maps.
 
 #### October 4th 2024
 [Commit: 28156b0b5f](https://github.com/HashtagMarky/pokeemerald/commit/28156b0b5fa6933f42c5673026d046d5e6c2e566)
