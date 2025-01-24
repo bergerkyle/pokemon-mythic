@@ -118,5 +118,21 @@ This also uses `SPAWN_ODDS` to define whether or not the object should be shown 
 #### October 4th 2024
 [Commit: 28156b0b5f](https://github.com/HashtagMarky/pokeemerald/commit/28156b0b5fa6933f42c5673026d046d5e6c2e566)
 
+### Give Wild Encounters the same level as normal wild encounters
+Adds a macro `startwildoverworldencounter` which will generate a wild encounter with the same level as normal wild encounters.
+Instead of having to make a script for every single ow encounter, you can make a general script that works as an useall solution.
+
+Example:
+```
+Common_EventScript_OWWildEncounter::
+	lock
+	faceplayer
+	startwildoverworldencounter
+	release
+	end
+```
+
+This makes it so that you can focus on implementing the encounters with minimal setup in making more scripts. (You still have to define the objects as wild encounters though in poryscript).
+
 ## Further Work
 My own implementation of dedicated overworld encounters feature is still a giant WIP, but if I make any updates on these tools or develop any others I will update this page. If you find any bugs, or even have any fixes, please feel free to submit a PR or ping me (HashtagMarky) a message on the TAH Discord.  
