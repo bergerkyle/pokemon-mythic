@@ -69,10 +69,12 @@ static bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildM
 static bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildMon, u8 type, u16 ability, u8 *monIndex);
 #endif
 static bool8 IsAbilityAllowingEncounter(u8 level);
-static u16 ReturnFixedSpeciesEncounter();
-static u16 ReturnHeaderSpeciesEncounter(u8 encounterType, u16 headerId);
+static struct WildPokemon ReturnFixedSpeciesEncounter();
+static struct WildPokemon ReturnHeaderSpeciesEncounter(u8 encounterType);
 static bool8 GeneratedOverworldMonShinyRoll(void);
 
+// ow-encounters: store data based on the object event graphics ids
+EWRAM_DATA struct WildPokemon activeOverworldEncounters[(OBJ_EVENT_GFX_LAST - OBJ_EVENT_GFX_VARS)] = {0};
 EWRAM_DATA static u8 sWildEncountersDisabled = 0;
 EWRAM_DATA static u32 sFeebasRngValue = 0;
 EWRAM_DATA bool8 gIsFishingEncounter = 0;
@@ -523,6 +525,35 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
     return TRUE;
 }
 
+static bool8 TryGenerateOverworldWildMon(const struct WildPokemon* wildMon)
+{
+    u8 level;
+    
+    if (wildMon->species == SPECIES_NONE)
+        return FALSE;
+
+    level = wildMon->minLevel + Random() % (wildMon->maxLevel - wildMon->minLevel + 1);    
+    CreateWildMon(wildMon->species, level);
+    return TRUE;
+}
+
+void GenerateOverworldWildMon(void)
+{
+    u16 graphicsId = GetObjectEventGraphicsIdByLocalIdAndMap(gSelectedObjectEvent, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    u16 variableOffset = (graphicsId >= OBJ_EVENT_GFX_VAR_0) ? graphicsId - OBJ_EVENT_GFX_VAR_0 : 0;
+    u16 objectEventVariable = VAR_OBJ_GFX_ID_0 + variableOffset;
+    bool8 shiny;
+    struct WildPokemon wildMon = activeOverworldEncounters[variableOffset];
+
+    TryGenerateOverworldWildMon(&wildMon);
+
+    shiny = VarGet(objectEventVariable) - (wildMon.species + OBJ_EVENT_GFX_SPECIES(NONE)) >= SPECIES_SHINY_TAG;
+    if (shiny)
+    {
+        SetMonData(&gEnemyParty[0], MON_DATA_IS_SHINY, &shiny);
+    }
+}
+
 static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 rod)
 {
     u8 wildMonIndex = ChooseWildMonIndex_Fishing(rod);
@@ -952,7 +983,16 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     }
 }
 
-u16 GetLocalLandMon(void)
+
+#define NULL_POKEMON \
+    (struct WildPokemon){ \
+        .species = SPECIES_NONE, \
+        .minLevel = 0, \
+        .maxLevel = 0, \
+    }
+
+
+struct WildPokemon GetLocalLandMon(void)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
 
@@ -961,12 +1001,12 @@ u16 GetLocalLandMon(void)
         const struct WildPokemonInfo *landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
 
         if (landMonsInfo)
-            return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+            return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()];
     }
-    return SPECIES_NONE;
+    return NULL_POKEMON;
 }
 
-u16 GetLocalWaterMon(void)
+struct WildPokemon GetLocalWaterMon(void)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
 
@@ -975,12 +1015,12 @@ u16 GetLocalWaterMon(void)
         const struct WildPokemonInfo *waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
 
         if (waterMonsInfo)
-            return waterMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
+            return waterMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()];
     }
-    return SPECIES_NONE;
+    return NULL_POKEMON;
 }
 
-u16 GetLocalRockSmashMon(void)
+struct WildPokemon GetLocalRockSmashMon(void)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
 
@@ -989,12 +1029,12 @@ u16 GetLocalRockSmashMon(void)
         const struct WildPokemonInfo *rockSmashMonsInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;
 
         if (rockSmashMonsInfo)
-            return rockSmashMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
+            return rockSmashMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()];
     }
-    return SPECIES_NONE;
+    return NULL_POKEMON;
 }
 
-u16 GetLocalFishingMon(u8 rod)
+struct WildPokemon GetLocalFishingMon(u8 rod)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
 
@@ -1003,9 +1043,9 @@ u16 GetLocalFishingMon(u8 rod)
         const struct WildPokemonInfo *fishingMonsInfo = gWildMonHeaders[headerId].fishingMonsInfo;
 
         if (fishingMonsInfo)
-            return fishingMonsInfo->wildPokemon[ChooseWildMonIndex_Fishing(rod)].species;
+            return fishingMonsInfo->wildPokemon[ChooseWildMonIndex_Fishing(rod)];
     }
-    return SPECIES_NONE;
+    return NULL_POKEMON;
 }
 
 bool8 UpdateRepelCounter(void)
@@ -1199,6 +1239,8 @@ bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
     u16 graphicsId = GetObjectEventGraphicsIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     u16 variableOffset = (graphicsId >= OBJ_EVENT_GFX_VAR_0) ? graphicsId - OBJ_EVENT_GFX_VAR_0 : 0;
     u16 objectEventVariable = VAR_OBJ_GFX_ID_0 + variableOffset;
+    struct WildPokemon wildMon = {0};
+    u16 shinyTag = 0;
 
     if (!(graphicsId >= OBJ_EVENT_GFX_VARS
         && graphicsId <= OBJ_EVENT_GFX_LAST))
@@ -1210,13 +1252,18 @@ bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
 
     if (headerId == HEADER_NONE || encounterType == ENCOUNTER_FIXED)
     {
-        VarSet(objectEventVariable, ReturnFixedSpeciesEncounter());
-        return FALSE;
-    }
-
-    if (Random() < SPAWN_ODDS)
+        wildMon = ReturnFixedSpeciesEncounter();
+    } 
+    else if (Random() < SPAWN_ODDS)
     {
-        VarSet(objectEventVariable, ReturnHeaderSpeciesEncounter(encounterType, headerId));
+        wildMon = ReturnHeaderSpeciesEncounter(encounterType);
+    }
+    
+    if (wildMon.species != SPECIES_NONE)
+    {
+        shinyTag = GeneratedOverworldMonShinyRoll() ? SPECIES_SHINY_TAG : 0;
+        VarSet(objectEventVariable, wildMon.species + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag);
+        activeOverworldEncounters[variableOffset] = wildMon;
     }
     else
     {
@@ -1225,50 +1272,49 @@ bool8 ScrCmd_SetObjectAsWildEncounter(struct ScriptContext *ctx)
     return FALSE;
 }
 
-static u16 ReturnFixedSpeciesEncounter(void)
+static struct WildPokemon ReturnFixedSpeciesEncounter(void)
 {
-    u16 shinyTag = GeneratedOverworldMonShinyRoll() ? SPECIES_SHINY_TAG : 0;
-    u16 species = SPECIES_CHIMCHAR;
-    
-    return species + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
+    struct WildPokemon wildMon = {
+        .minLevel = 5,
+        .maxLevel = 5,
+        .species = SPECIES_CHIMCHAR
+    };
+
+    return wildMon;
 }
 
-static u16 ReturnHeaderSpeciesEncounter(u8 encounterType, u16 headerId)
+static struct WildPokemon ReturnHeaderSpeciesEncounter(u8 encounterType)
 {
-    u16 shinyTag = GeneratedOverworldMonShinyRoll() ? SPECIES_SHINY_TAG : 0;
-    u16 species = SPECIES_NONE;
+    struct WildPokemon wildMon = {0};
 
     switch (encounterType)
     {
     case ENCOUNTER_LAND:
-        species = GetLocalLandMon();
+        wildMon = GetLocalLandMon();
         break;
 
     case ENCOUNTER_SURF:
-        species = GetLocalWaterMon();
+        wildMon = GetLocalWaterMon();
         break;
 
     case ENCOUNTER_ROCK_SMASH:
-        species = GetLocalRockSmashMon();
+        wildMon = GetLocalRockSmashMon();
         break;
 
     case ENCOUNTER_OLD_ROD:
-        species = GetLocalFishingMon(OLD_ROD);
+        wildMon = GetLocalFishingMon(OLD_ROD);
         break;
 
     case ENCOUNTER_GOOD_ROD:
-        species = GetLocalFishingMon(GOOD_ROD);
+        wildMon = GetLocalFishingMon(GOOD_ROD);
         break;
 
     case ENCOUNTER_SUPER_ROD:
-        species = GetLocalFishingMon(SUPER_ROD);
+        wildMon = GetLocalFishingMon(SUPER_ROD);
         break;
     }
 
-    if (species != SPECIES_NONE)
-        return species + OBJ_EVENT_GFX_SPECIES(NONE) + shinyTag;
-    else
-        return ReturnFixedSpeciesEncounter();
+    return wildMon;
 }
 
 static bool8 GeneratedOverworldMonShinyRoll(void) // Replicated partly from CreateBoxMon in pokemon.c
