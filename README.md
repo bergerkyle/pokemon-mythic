@@ -118,11 +118,13 @@ This also uses `SPAWN_ODDS` to define whether or not the object should be shown 
 #### October 4th 2024
 [Commit: 28156b0b5f](https://github.com/HashtagMarky/pokeemerald/commit/28156b0b5fa6933f42c5673026d046d5e6c2e566)
 
-### Give Wild Encounters the same level as normal wild encounters
-Adds a macro `startwildoverworldencounter` which will generate a wild encounter with the same level as normal wild encounters.
-Instead of having to make a script for every single ow encounter, you can make a general script that works as an useall solution.
+---
+### Automatically Give Wild Encounters the Same Level as Normal Wild Encounters
 
-Example:
+> **Note**: The changes also refactor some of the functions in `wild_encounter.c` to return `struct WildMon` instead of just a species constant.
+
+Thanks to the changes in this [Pull Request](https://github.com/HashtagMarky/pokeemerald/pull/1) by [LordRainDance2](https://github.com/lordraindance2), overworld encounters can now have their levels dynamically set the same way normal wild encounters do. This also allows for a common event script to be defined using the new macro `startwildoverworldencounter` which remove the need to make a script for every single overworld encounter, working as an useall solution. The individual macros can still be used in individual scripts, however.
+
 ```
 Common_EventScript_OWWildEncounter::
 	lock
@@ -132,7 +134,7 @@ Common_EventScript_OWWildEncounter::
 	end
 ```
 
-This makes it so that you can focus on implementing the encounters with minimal setup in making more scripts. (You still have to define the objects as wild encounters though in poryscript).
+This PR make it easier to focus on implementing the encounters with minimal setup or making more scripts, though the objects still have to be defined as wild encounters though in poryscript.
 
 ## Further Work
 My own implementation of dedicated overworld encounters feature is still a giant WIP, but if I make any updates on these tools or develop any others I will update this page. If you find any bugs, or even have any fixes, please feel free to submit a PR or ping me (HashtagMarky) a message on the TAH Discord.  
