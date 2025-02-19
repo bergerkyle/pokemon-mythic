@@ -10804,7 +10804,7 @@ static const struct LevelUpMove sSpiritombLevelUpLearnset[] = {
 #if P_FAMILY_GIBLE
 static const struct LevelUpMove sGibleLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_KARATE_CHOP),
-    LEVEL_UP_MOVE( 1, MOVE_BITE,
+    LEVEL_UP_MOVE( 1, MOVE_BITE),
     LEVEL_UP_MOVE( 6, MOVE_BULLDOZE),
     LEVEL_UP_MOVE(12, MOVE_DRAGON_RAGE),
     LEVEL_UP_MOVE(18, MOVE_BULLDOZE),
