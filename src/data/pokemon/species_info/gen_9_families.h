@@ -5907,12 +5907,12 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 #if P_FAMILY_FRIGIBAX
     [SPECIES_FRIGIBAX] =
     {
-        .baseHP        = 65,
-        .baseAttack    = 75,
-        .baseDefense   = 45,
-        .baseSpeed     = 55,
-        .baseSpAttack  = 35,
-        .baseSpDefense = 45,
+        .baseHP        = 80,
+        .baseAttack    = 80,
+        .baseDefense   = 60,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_DRAGON, TYPE_ICE),
         .catchRate = 45,
         .expYield = 64,
@@ -5965,17 +5965,17 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .levelUpLearnset = sFrigibaxLevelUpLearnset,
         .teachableLearnset = sFrigibaxTeachableLearnset,
         .eggMoveLearnset = sFrigibaxEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_ARCTIBAX}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_ARCTIBAX}),
     },
 
     [SPECIES_ARCTIBAX] =
     {
-        .baseHP        = 90,
-        .baseAttack    = 95,
-        .baseDefense   = 66,
-        .baseSpeed     = 62,
-        .baseSpAttack  = 45,
-        .baseSpDefense = 65,
+        .baseHP        = 100,
+        .baseAttack    = 100,
+        .baseDefense   = 80,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_DRAGON, TYPE_ICE),
         .catchRate = 25,
         .expYield = 148,
@@ -6027,7 +6027,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         )
         .levelUpLearnset = sArctibaxLevelUpLearnset,
         .teachableLearnset = sArctibaxTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 54, SPECIES_BAXCALIBUR}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_BAXCALIBUR}),
     },
 
     [SPECIES_BAXCALIBUR] =
