@@ -12,11 +12,11 @@
   "allow_running": false,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL",
-      "x": 7,
+      "x": 6,
       "y": 1,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -185,7 +185,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MOM",
-      "x": 7,
+      "x": 6,
       "y": 1,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -198,8 +198,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 3,
-      "y": 4,
+      "x": 5,
+      "y": 5,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
@@ -211,7 +211,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWABLU_DOLL",
-      "x": 5,
+      "x": 6,
       "y": 5,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
@@ -225,34 +225,28 @@
   ],
   "warp_events": [
     {
-      "x": 7,
+      "x": 6,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
       "dest_warp_id": "2"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",
-      "x": 0,
-      "y": 1,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "LittlerootTown_BrendansHouse_2F_EventScript_PC"
-    },
-    {
-      "type": "sign",
       "x": 1,
-      "y": 1,
+      "y": 2,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "PlayersHouse_2F_EventScript_Notebook"
     },
     {
       "type": "sign",
-      "x": 5,
+      "x": 4,
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -260,8 +254,8 @@
     },
     {
       "type": "sign",
-      "x": 3,
-      "y": 1,
+      "x": 2,
+      "y": 2,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "PlayersHouse_2F_EventScript_GameCube"

@@ -825,3 +825,14 @@ const struct Tileset gTileset_UnionRoom =
     .metatileAttributes = gMetatileAttributes_UnionRoom,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_legend_of_zelda_house_secondary =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_legend_of_zelda_house_secondary,
+    .palettes = gTilesetPalettes_legend_of_zelda_house_secondary,
+    .metatiles = gMetatiles_legend_of_zelda_house_secondary,
+    .metatileAttributes = gMetatileAttributes_legend_of_zelda_house_secondary,
+    .callback = NULL,
+};
