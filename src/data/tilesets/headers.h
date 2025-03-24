@@ -836,3 +836,14 @@ const struct Tileset gTileset_legend_of_zelda_house_secondary =
     .metatileAttributes = gMetatileAttributes_legend_of_zelda_house_secondary,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_CastleInterior =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_CastleInterior,
+    .palettes = gTilesetPalettes_CastleInterior,
+    .metatiles = gMetatiles_CastleInterior,
+    .metatileAttributes = gMetatileAttributes_CastleInterior,
+    .callback = NULL,
+};
