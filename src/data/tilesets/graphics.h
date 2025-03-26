@@ -1671,3 +1671,41 @@ const u16 gTilesetPalettes_CastleInterior[][16] =
 };
 
 const u32 gTilesetTiles_CastleInterior[] = INCBIN_U32("data/tilesets/primary/castle_interior/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_green_house[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/green_house/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/green_house/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/green_house/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/green_house/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/green_house/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/green_house/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/green_house/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/green_house/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/green_house/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/green_house/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/green_house/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/green_house/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/green_house/palettes/12.gbapal"),
+};
+
+const u32 gTilesetTiles_green_house[] = INCBIN_U32("data/tilesets/secondary/green_house/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_grass_general[][16] =
+{
+    INCBIN_U16("data/tilesets/primary/grass_general/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/primary/grass_general/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/primary/grass_general/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/primary/grass_general/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/primary/grass_general/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/primary/grass_general/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/primary/grass_general/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/primary/grass_general/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/primary/grass_general/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/primary/grass_general/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/primary/grass_general/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/primary/grass_general/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/primary/grass_general/palettes/12.gbapal"),
+};
+
+const u32 gTilesetTiles_grass_general[] = INCBIN_U32("data/tilesets/primary/grass_general/tiles.4bpp.lz");

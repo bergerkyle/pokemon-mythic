@@ -212,3 +212,9 @@ const u16 gMetatiles_legend_of_zelda_house_secondary[] = INCBIN_U16("data/tilese
 const u16 gMetatileAttributes_legend_of_zelda_house_secondary[] = INCBIN_U16("data/tilesets/secondary/legend_of_zelda_house_secondary/metatile_attributes.bin");
 const u16 gMetatiles_CastleInterior[] = INCBIN_U16("data/tilesets/primary/castle_interior/metatiles.bin");
 const u16 gMetatileAttributes_CastleInterior[] = INCBIN_U16("data/tilesets/primary/castle_interior/metatile_attributes.bin");
+
+const u16 gMetatiles_green_house[] = INCBIN_U16("data/tilesets/secondary/green_house/metatiles.bin");
+const u16 gMetatileAttributes_green_house[] = INCBIN_U16("data/tilesets/secondary/green_house/metatile_attributes.bin");
+
+const u16 gMetatiles_grass_general[] = INCBIN_U16("data/tilesets/primary/grass_general/metatiles.bin");
+const u16 gMetatileAttributes_grass_general[] = INCBIN_U16("data/tilesets/primary/grass_general/metatile_attributes.bin");
