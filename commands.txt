@@ -1,0 +1,1 @@
+porytiles compile-primary -Wall -disable-attribute-generation -o $HOME/github/pokemon-mythic/data/tilesets/primary/forest $HOME/Documents/porytiles/forest $HOME/github/pokemon-mythic/include/constants/metatile_behaviors.h

@@ -218,3 +218,6 @@ const u16 gMetatileAttributes_green_house[] = INCBIN_U16("data/tilesets/secondar
 
 const u16 gMetatiles_grass_general[] = INCBIN_U16("data/tilesets/primary/grass_general/metatiles.bin");
 const u16 gMetatileAttributes_grass_general[] = INCBIN_U16("data/tilesets/primary/grass_general/metatile_attributes.bin");
+
+const u16 gMetatiles_forest[] = INCBIN_U16("data/tilesets/primary/forest/metatiles.bin");
+const u16 gMetatileAttributes_forest[] = INCBIN_U16("data/tilesets/primary/forest/metatile_attributes.bin");

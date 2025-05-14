@@ -96,7 +96,7 @@
       "name": "LittlerootTown_Layout",
       "width": 20,
       "height": 20,
-      "primary_tileset": "gTileset_grass_general",
+      "primary_tileset": "gTileset_forest",
       "secondary_tileset": "gTileset_green_house",
       "border_filepath": "data/layouts/LittlerootTown/border.bin",
       "blockdata_filepath": "data/layouts/LittlerootTown/map.bin"
