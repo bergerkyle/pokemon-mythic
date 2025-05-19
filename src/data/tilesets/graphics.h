@@ -1728,3 +1728,22 @@ const u16 gTilesetPalettes_forest[][16] =
 };
 
 const u32 gTilesetTiles_forest[] = INCBIN_U32("data/tilesets/primary/forest/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_village[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/village/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/village/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/village/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/village/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/village/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/village/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/village/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/village/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/village/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/village/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/village/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/village/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/village/palettes/12.gbapal"),
+};
+
+const u32 gTilesetTiles_village[] = INCBIN_U32("data/tilesets/secondary/village/tiles.4bpp.lz");
