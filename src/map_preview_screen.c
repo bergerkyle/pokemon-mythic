@@ -374,7 +374,7 @@ static const struct WindowTemplate sMapNameWindow = {
     .width = 13,
     .height = 2,
     .paletteNum = 14,
-    .baseBlock = 0x1C2
+    .baseBlock = 0x259
 };
 
 static const struct WindowTemplate sMapNameWindowLarge = {
@@ -384,7 +384,7 @@ static const struct WindowTemplate sMapNameWindowLarge = {
     .width = 22,
     .height = 2,
     .paletteNum = 14,
-    .baseBlock = 0x1C2
+    .baseBlock = 0x259
 };
 
 static const struct BgTemplate sMapPreviewBgTemplate[1] = {
