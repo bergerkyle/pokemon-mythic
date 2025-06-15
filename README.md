@@ -1,6 +1,6 @@
 # Ikigai OW Encounter Tools
 ```
-Based off RHH's pokeemerald-expansion 1.9.2 https://github.com/rh-hideout/pokeemerald-expansion/
+Based off RHH's pokeemerald-expansion 1.12.0 https://github.com/rh-hideout/pokeemerald-expansion/
 ```
 These are some of the tools I've made for my hack, aiming to provide a framework to develop your own overworld encounter feature. These rely heavily on **merrp**'s followers branch, so credit goes to them as well as the maintainers who have been recently added it to **pokeemerald-expansion**.
 
