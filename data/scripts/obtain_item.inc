@@ -23,6 +23,10 @@ EventScript_BufferPocketNameAndTryFanfare::
 	case POCKET_POKE_BALLS, EventScript_BufferPokeballsPocket
 	case POCKET_TM_HM,      EventScript_BufferTMHMsPocket
 	case POCKET_BERRIES,    EventScript_BufferBerriesPocket
+	case POCKET_HELMS,      EventScript_BufferHelmsPocket
+	case POCKET_CLOAKS,     EventScript_BufferCloaksPocket
+	case POCKET_ARMOR,      EventScript_BufferArmorPocket
+	case POCKET_WEAPONS,     EventScript_BufferWeaponsPocket
 	end
 
 EventScript_BufferItemsPocket::
@@ -32,6 +36,26 @@ EventScript_BufferItemsPocket::
 
 EventScript_BufferKeyItemsPocket::
 	bufferstdstring STR_VAR_3, STDSTRING_KEYITEMS
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferHelmsPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_HELMS
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferCloaksPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_CLOAKS
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferArmorPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_ARMOR
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferWeaponsPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_WEAPONS
 	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
 

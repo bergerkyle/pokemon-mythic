@@ -165,6 +165,10 @@
 #define STDSTRING_BATTLE_ARENA     27
 #define STDSTRING_BATTLE_PIKE      28
 #define STDSTRING_BATTLE_PYRAMID   29
+#define STDSTRING_HELMS            30
+#define STDSTRING_CLOAKS           31
+#define STDSTRING_ARMOR            32
+#define STDSTRING_WEAPONS          33
 
 // Dynamic Multichoice Callbacks
 

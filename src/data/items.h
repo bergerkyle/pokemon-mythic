@@ -14093,4 +14093,21 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_PokeshiDoll,
         .iconPalette = gItemIconPalette_PokeshiDoll,
     },
+
+// WEAPONS
+
+    [ITEM_MASTER_BLADE] =
+    {
+        .name = _("Master Blade"),
+        .price = 2000,
+        .description = COMPOUND_STRING(
+            "A legendary\n"
+            "blade from Elfnir\n"
+            "+80 ATK / SP ATK."),
+        .pocket = POCKET_WEAPONS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_MasterBlade,
+        .iconPalette = gItemIconPalette_MasterBlade,
+    },
 };

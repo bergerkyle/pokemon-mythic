@@ -1742,6 +1742,8 @@ extern const u32 gItemIconPalette_TwiceSpicedRadish[];
 
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
+extern const u32 gItemIcon_MasterBlade[];
+extern const u32 gItemIconPalette_MasterBlade[];
 
 //menu graphics
 extern const u16 gMenuInfoElements1_Pal[16];

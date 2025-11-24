@@ -50,6 +50,10 @@ extern const u8 gText_Tough2[];
 
 extern const u8 gText_Items[];
 extern const u8 gText_Key_Items[];
+extern const u8 gText_Helms[];
+extern const u8 gText_Cloaks[];
+extern const u8 gText_Armor[];
+extern const u8 gText_Weapons[];
 extern const u8 gText_Poke_Balls[];
 extern const u8 gText_TMs_Hms[];
 extern const u8 gText_Berries2[];
