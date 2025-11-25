@@ -1412,7 +1412,18 @@ static void ChangeBagPocketId(u8 *bagPocketId, s8 deltaBagPocketId)
     else if (deltaBagPocketId == MENU_CURSOR_DELTA_LEFT && *bagPocketId == 0)
         *bagPocketId = POCKET_MAX_SCROLL;
     else
-        *bagPocketId += deltaBagPocketId;
+    {
+        u32 changedPocket = *bagPocketId;
+        changedPocket += deltaBagPocketId;
+        if (FRLG_I_ADD_TM_CASE_WITH_TMS && changedPocket == POCKET_TM_HM)
+            changedPocket += deltaBagPocketId;
+        if (FRLG_I_ADD_BERRY_POUCH_WITH_BERRIES && changedPocket == POCKET_BERRIES)
+            changedPocket += deltaBagPocketId;
+        if (FRLG_I_ADD_TM_CASE_WITH_TMS && changedPocket == POCKET_TM_HM) // redundancy so that it's check for scrolling left
+            changedPocket += deltaBagPocketId;
+        *bagPocketId = changedPocket;
+    }
+
 }
 
 static void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, bool16 skipEraseList)
@@ -1509,8 +1520,13 @@ static void DrawItemListBgRow(u8 y)
     ScheduleBgCopyTilemapToVram(2);
 }
 
-static void DrawPocketIndicatorSquare(u8 x, bool8 isCurrentPocket)
+static void DrawPocketIndicatorSquare(u8 pocket, bool8 isCurrentPocket)
 {
+    u8 x = pocket;
+    if (FRLG_I_ADD_TM_CASE_WITH_TMS && pocket > POCKET_TM_HM)
+        x = x - 1;
+    if (FRLG_I_ADD_BERRY_POUCH_WITH_BERRIES && pocket > POCKET_BERRIES)
+        x = x - 1;
     if (!isCurrentPocket)
         FillBgTilemapBufferRect_Palette0(2, 0x1017, x + 5, 3, 1, 1);
     else
