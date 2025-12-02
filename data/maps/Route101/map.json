@@ -20,8 +20,8 @@
     },
     {
       "map": "MAP_LITTLEROOT_TOWN",
-      "offset": 0,
-      "direction": "down"
+      "offset": -8,
+      "direction": "right"
     }
   ],
   "object_events": [
