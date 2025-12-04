@@ -779,6 +779,16 @@
 #define METATILE_Underwater_FloorShadow  0x228
 #define METATILE_Underwater_RockWall     0x21E
 
+// gTileset_forest
+#define METATILE_forest_ReflectiveWater  0x0BC
+#define METATILE_forest_TallGrass        0x008
+
+// gTileset_village
+#define METATILE_village_CastleDoor       0x27B
+#define METATILE_village_Door             0x23D
+#define METATILE_village_Door_PokeCenter  0x2AD
+#define METATILE_village_Door_PokeMart    0x2D5
+
 // Other
 #define METATILE_RSMossdeepGym_RedArrow_Down   0x205
 #define METATILE_RSMossdeepGym_RedArrow_Left   0x20C
