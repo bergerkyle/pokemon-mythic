@@ -1,2 +1,4 @@
 porytiles compile-primary -Wall -disable-attribute-generation -o $HOME/github/pokemon-mythic/data/tilesets/primary/forest $HOME/Documents/porytiles/forest $HOME/github/pokemon-mythic/include/constants/metatile_behaviors.h
 porytiles compile-secondary -Wall -o $HOME/github/pokemon-mythic/data/tilesets/secondary/village $HOME/Documents/porytiles/village $HOME/Documents/porytiles/forest $HOME/github/pokemon-mythic/include/constants/metatile_behaviors.h
+porytiles compile-primary -Wall -disable-attribute-generation -o $HOME/github/pokemon-mythic/data/tilesets/primary/castle_interior $HOME/Documents/porytiles/CastleInterior $HOME/github/pokemon-mythic/include/constants/metatile_behaviors.h
+porytiles compile-primary -Wall -disable-attribute-generation -o $HOME/github/pokemon-mythic/data/tilesets/primary/village_interior $HOME/Documents/porytiles/village_interior $HOME/github/pokemon-mythic/include/constants/metatile_behaviors.h
