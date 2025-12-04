@@ -546,7 +546,7 @@
       "name": "LittlerootTown_BrendansHouse_2F_Layout",
       "width": 9,
       "height": 8,
-      "primary_tileset": "gTileset_Building",
+      "primary_tileset": "gTileset_village_interior",
       "secondary_tileset": "gTileset_legend_of_zelda_house_secondary",
       "border_filepath": "data/layouts/LittlerootTown_BrendansHouse_2F/border.bin",
       "blockdata_filepath": "data/layouts/LittlerootTown_BrendansHouse_2F/map.bin"
