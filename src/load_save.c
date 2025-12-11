@@ -27,6 +27,10 @@ struct LoadedSaveData
  /*0x00F0*/ struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
  /*0x0130*/ struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
  /*0x0230*/ struct ItemSlot berries[BAG_BERRIES_COUNT];
+ /*0x0230*/ struct ItemSlot weapons[BAG_WEAPONS_COUNT];
+ /*0x0230*/ struct ItemSlot cloaks[BAG_CLOAKS_COUNT];
+ /*0x0230*/ struct ItemSlot armor[BAG_ARMOR_COUNT];
+ /*0x0230*/ struct ItemSlot helms[BAG_HELMS_COUNT];
  /*0x02E8*/ struct Mail mail[MAIL_COUNT];
 };
 
@@ -276,6 +280,19 @@ void LoadPlayerBag(void)
     for (i = 0; i < BAG_BERRIES_COUNT; i++)
         gLoadedSaveData.berries[i] = gSaveBlock1Ptr->bagPocket_Berries[i];
 
+    // load player berries.
+    for (i = 0; i < BAG_WEAPONS_COUNT; i++)
+        gLoadedSaveData.weapons[i] = gSaveBlock1Ptr->bagPocket_Weapons[i];
+    // load player berries.
+    for (i = 0; i < BAG_CLOAKS_COUNT; i++)
+        gLoadedSaveData.cloaks[i] = gSaveBlock1Ptr->bagPocket_Cloaks[i];
+    // load player berries.
+    for (i = 0; i < BAG_ARMOR_COUNT; i++)
+        gLoadedSaveData.armor[i] = gSaveBlock1Ptr->bagPocket_Armor[i];
+    // load player berries.
+    for (i = 0; i < BAG_HELMS_COUNT; i++)
+        gLoadedSaveData.helms[i] = gSaveBlock1Ptr->bagPocket_Helms[i];
+
     // load mail.
     for (i = 0; i < MAIL_COUNT; i++)
         gLoadedSaveData.mail[i] = gSaveBlock1Ptr->mail[i];
@@ -303,6 +320,21 @@ void SavePlayerBag(void)
     // save player TMs and HMs.
     for (i = 0; i < BAG_TMHM_COUNT; i++)
         gSaveBlock1Ptr->bagPocket_TMHM[i] = gLoadedSaveData.TMsHMs[i];
+
+    // save player berries.
+    for (i = 0; i < BAG_BERRIES_COUNT; i++)
+        gSaveBlock1Ptr->bagPocket_Berries[i] = gLoadedSaveData.berries[i];
+
+    // save player berries.
+    for (i = 0; i < BAG_WEAPONS_COUNT; i++)
+        gSaveBlock1Ptr->bagPocket_Weapons[i] = gLoadedSaveData.weapons[i];
+
+    // save player berries.
+    for (i = 0; i < BAG_CLOAKS_COUNT; i++)
+        gSaveBlock1Ptr->bagPocket_Cloaks[i] = gLoadedSaveData.cloaks[i];
+    // save player berries.
+    for (i = 0; i < BAG_ARMOR_COUNT; i++)
+        gSaveBlock1Ptr->bagPocket_Armor[i] = gLoadedSaveData.armor[i];
 
     // save player berries.
     for (i = 0; i < BAG_BERRIES_COUNT; i++)

@@ -780,8 +780,11 @@
 #define METATILE_Underwater_RockWall     0x21E
 
 // gTileset_forest
-#define METATILE_forest_ReflectiveWater  0x0BC
-#define METATILE_forest_TallGrass        0x008
+#define METATILE_forest_Grass_TreeLeft       0x002
+#define METATILE_forest_Grass_TreeRight      0x003
+#define METATILE_forest_ReflectiveWater      0x0BC
+#define METATILE_forest_TallGrass_TreeLeft   0x008
+#define METATILE_forest_TallGrass_TreeRight  0x009
 
 // gTileset_village
 #define METATILE_village_CastleDoor       0x27B

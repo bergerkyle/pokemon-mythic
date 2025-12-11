@@ -84,6 +84,10 @@ struct GFRomHeader
     u8 bagCountPokeballs;
     u8 bagCountTMHMs;
     u8 bagCountBerries;
+    u8 bagCountWeapons;
+    u8 bagCountCloaks;
+    u8 bagCountArmor;
+    u8 bagCountHelms;
     u8 pcItemsCount;
     u32 pcItemsOffset;
     u32 giftRibbonsOffset;
@@ -167,6 +171,10 @@ static const struct GFRomHeader sGFRomHeader = {
     .bagCountPokeballs = BAG_POKEBALLS_COUNT,
     .bagCountTMHMs = BAG_TMHM_COUNT,
     .bagCountBerries = BAG_BERRIES_COUNT,
+    .bagCountWeapons = BAG_WEAPONS_COUNT,
+    .bagCountCloaks = BAG_CLOAKS_COUNT,
+    .bagCountArmor = BAG_ARMOR_COUNT,
+    .bagCountHelms = BAG_HELMS_COUNT,
     .pcItemsCount = PC_ITEMS_COUNT,
     .pcItemsOffset = offsetof(struct SaveBlock1, pcItems),
     .giftRibbonsOffset = offsetof(struct SaveBlock1, giftRibbons),
