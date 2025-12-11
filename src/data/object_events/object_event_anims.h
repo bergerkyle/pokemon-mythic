@@ -567,6 +567,17 @@ static const union AnimCmd sAnim_ExitPokeballFastSouth[] =
     ANIMCMD_JUMP(0),
 };
 
+static const union AnimCmd sAnim_OpenChest[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(2, 5),
+    ANIMCMD_FRAME(3, 5),
+    ANIMCMD_FRAME(4, 10),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_JUMP(0),
+};
+
 static const union AnimCmd sAnim_ExitPokeballFastNorth[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -1170,6 +1181,7 @@ const union AnimCmd *const sAnimTable_Following[] = {
     [ANIM_EXIT_POKEBALL_FAST_NORTH] = sAnim_ExitPokeballFastNorth,
     [ANIM_EXIT_POKEBALL_FAST_WEST] = sAnim_ExitPokeballFastWest,
     [ANIM_EXIT_POKEBALL_FAST_EAST] = sAnim_ExitPokeballFastEast,
+    [ANIM_OPEN_CHEST] = sAnim_OpenChest,
 };
 
 // Like the above, but has separate frames for facing right
@@ -1198,6 +1210,7 @@ const union AnimCmd *const sAnimTable_Following_Asym[] = {
     [ANIM_EXIT_POKEBALL_FAST_NORTH] = sAnim_ExitPokeballFastNorth,
     [ANIM_EXIT_POKEBALL_FAST_WEST] = sAnim_ExitPokeballFastWest,
     [ANIM_EXIT_POKEBALL_FAST_EAST] = sAnim_ExitPokeballFastEast_Asym,
+    [ANIM_OPEN_CHEST] = sAnim_OpenChest,
 };
 
 static const union AnimCmd *const sAnimTable_HoOh[] = {

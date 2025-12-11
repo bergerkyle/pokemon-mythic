@@ -81,6 +81,8 @@ u8 MovementAction_WalkInPlaceFasterUp_Step0(struct ObjectEvent *, struct Sprite 
 u8 MovementAction_WalkInPlaceFasterLeft_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkInPlaceFasterRight_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_OpenChest_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_OpenChest_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_EnterPokeball_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_RideWaterCurrentDown_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_RideWaterCurrentDown_Step1(struct ObjectEvent *, struct Sprite *);
@@ -314,6 +316,7 @@ u8 (*const gMovementActionFuncs_WalkInPlaceFasterUp[])(struct ObjectEvent *, str
 u8 (*const gMovementActionFuncs_WalkInPlaceFasterLeft[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_WalkInPlaceFasterRight[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_ExitPokeball[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_OpenChest[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_EnterPokeball[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_RideWaterCurrentDown[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_RideWaterCurrentUp[])(struct ObjectEvent *, struct Sprite *);
@@ -601,6 +604,7 @@ u8 (*const *const gMovementActionFuncs[])(struct ObjectEvent *, struct Sprite *)
     [MOVEMENT_ACTION_EMOTE_X] = gMovementActionFuncs_EmoteX,
     [MOVEMENT_ACTION_EMOTE_DOUBLE_EXCL_MARK] = gMovementActionFuncs_EmoteDoubleExclMark,
     [MOVEMENT_ACTION_EXIT_POKEBALL] = gMovementActionFuncs_ExitPokeball,
+    [MOVEMENT_ACTION_OPEN_CHEST] = gMovementActionFuncs_OpenChest,
     [MOVEMENT_ACTION_ENTER_POKEBALL] = gMovementActionFuncs_EnterPokeball,
     [MOVEMENT_ACTION_RUN_DOWN_SLOW] = gMovementActionFuncs_RunDownSlow,
     [MOVEMENT_ACTION_RUN_UP_SLOW] = gMovementActionFuncs_RunUpSlow,
@@ -899,6 +903,11 @@ u8 (*const gMovementActionFuncs_WalkInPlaceFasterDown[])(struct ObjectEvent *, s
     MovementAction_PauseSpriteAnim,
 };
 
+u8 (*const gMovementActionFuncs_OpenChest[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_OpenChest_Step0,
+    MovementAction_OpenChest_Step1,
+    MovementAction_PauseSpriteAnim,
+};
 u8 (*const gMovementActionFuncs_ExitPokeball[])(struct ObjectEvent *, struct Sprite *) = {
     MovementAction_ExitPokeball_Step0,
     MovementAction_ExitPokeball_Step1,

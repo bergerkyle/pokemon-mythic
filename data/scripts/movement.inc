@@ -14,6 +14,10 @@ Common_Movement_Delay48:
 	delay_16
 	delay_16
 	step_end
+	
+Common_Movement_OpenChest:
+	open_chest
+	step_end
 
 Common_Movement_FacePlayer:
 	face_player

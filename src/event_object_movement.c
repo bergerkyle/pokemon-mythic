@@ -7381,6 +7381,31 @@ bool8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *objectEvent, struct 
     objectEvent->inanimate = FALSE;
     return MovementAction_ExitPokeball_Step1(objectEvent, sprite);
 }
+bool8 MovementAction_OpenChest_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    u16 graphicsId = objectEvent->graphicsId;
+    sprite->sDuration = 35;
+    objectEvent->invisible = FALSE;
+    ObjectEventSetGraphicsId(objectEvent, OBJ_EVENT_GFX_ITEM_CHEST);
+    objectEvent->graphicsId = graphicsId;
+    SetAndStartSpriteAnim(sprite, ANIM_OPEN_CHEST, 0); // chest opening animation
+    sprite->sActionFuncId = 1;
+    objectEvent->inanimate = FALSE;
+    return MovementAction_OpenChest_Step1(objectEvent, sprite);
+}
+
+bool8 MovementAction_OpenChest_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    if (--sprite->sDuration == 0)
+    {
+        sprite->sActionFuncId = 2;
+        sprite->animCmdIndex = 0;
+        sprite->animPaused = TRUE;
+        return TRUE;
+    }
+    return FALSE;
+}
+
 
 static const union AffineAnimCmd sAffineAnim_PokeballExit[] =
 {
