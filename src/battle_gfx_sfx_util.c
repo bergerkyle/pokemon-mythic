@@ -777,7 +777,7 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
         {
             if (state == 2)
             {
-                switch (GetBattlerCoordsIndex(B_POSITION_PLAYER_LEFT))
+                switch (WhichBattleCoords(B_POSITION_PLAYER_LEFT))
                 {
                 default:
                     LoadCompressedSpriteSheet(&sSpriteSheets_DoublesPlayerHealthbox[0]);
