@@ -83,6 +83,8 @@ enum {
 
 enum {
     ACTION_USE,
+    ACTION_EQUIP,
+    ACTION_UNEQUIP,
     ACTION_TOSS,
     ACTION_REGISTER,
     ACTION_GIVE,
@@ -207,6 +209,7 @@ static void BagMenu_ItemPrintCallback(u8, u32, u8);
 static void ItemMenu_UseOutOfBattle(u8);
 static void ItemMenu_Toss(u8);
 static void ItemMenu_Register(u8);
+static void ItemMenu_Equip(u8);
 static void ItemMenu_Give(u8);
 static void ItemMenu_Cancel(u8);
 static void ItemMenu_UseInBattle(u8);
@@ -303,6 +306,8 @@ static const struct MenuAction sItemMenuActions[] = {
     [ACTION_USE]               = {gMenuText_Use,                {ItemMenu_UseOutOfBattle}},
     [ACTION_TOSS]              = {gMenuText_Toss,               {ItemMenu_Toss}},
     [ACTION_REGISTER]          = {gMenuText_Register,           {ItemMenu_Register}},
+    [ACTION_EQUIP]             = {COMPOUND_STRING("EQUIP"),     {ItemMenu_Equip}},
+    [ACTION_UNEQUIP]           = {COMPOUND_STRING("UNEQUIP"),   {ItemMenu_Equip}},
     [ACTION_GIVE]              = {gMenuText_Give,               {ItemMenu_Give}},
     [ACTION_CANCEL]            = {gText_Cancel2,                {ItemMenu_Cancel}},
     [ACTION_BATTLE_USE]        = {gMenuText_Use,                {ItemMenu_UseInBattle}},
@@ -349,6 +354,26 @@ static const u8 sContextMenuItems_BerriesPocket[] = {
     ACTION_CHECK_TAG,   ACTION_DUMMY,
     ACTION_USE,         ACTION_GIVE,
     ACTION_TOSS,        ACTION_CANCEL
+};
+
+static const u8 sContextMenuItems_WeaponsPocket[] = {
+    ACTION_EQUIP,        ACTION_DUMMY,
+    ACTION_TOSS,       ACTION_CANCEL
+};
+
+static const u8 sContextMenuItems_HelmsPocket[] = {
+    ACTION_EQUIP,        ACTION_DUMMY,
+    ACTION_TOSS,       ACTION_CANCEL
+};
+
+static const u8 sContextMenuItems_ArmorPocket[] = {
+    ACTION_EQUIP,        ACTION_DUMMY,
+    ACTION_TOSS,       ACTION_CANCEL
+};
+
+static const u8 sContextMenuItems_CloaksPocket[] = {
+    ACTION_EQUIP,        ACTION_DUMMY,
+    ACTION_TOSS,       ACTION_CANCEL
 };
 
 static const u8 sContextMenuItems_BattleUse[] = {
@@ -1036,7 +1061,27 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
         if (gBagPosition.pocket == POCKET_TM_HM && GetItemTMHMIndex(itemSlot.itemId) > NUM_TECHNICAL_MACHINES)
             BlitBitmapToWindow(windowId, gBagMenuHMIcon_Gfx, 8, y - 1, 16, 16);
 
-        if (gBagPosition.pocket != POCKET_KEY_ITEMS && GetItemImportance(itemSlot.itemId) == FALSE)
+        if (gBagPosition.pocket == POCKET_WEAPONS){
+            // Print registered icon
+            if (gSaveBlock1Ptr->equippedWeapon != ITEM_NONE && gSaveBlock1Ptr->equippedWeapon == itemSlot.itemId)
+                BlitBitmapToWindow(windowId, sRegisteredSelect_Gfx, 96, y - 1, 24, 16);
+        }
+        else if (gBagPosition.pocket == POCKET_HELMS){
+            // Print registered icon
+            if (gSaveBlock1Ptr->equippedHelm != ITEM_NONE && gSaveBlock1Ptr->equippedHelm == itemSlot.itemId)
+                BlitBitmapToWindow(windowId, sRegisteredSelect_Gfx, 96, y - 1, 24, 16);
+        } 
+        else if (gBagPosition.pocket == POCKET_ARMOR){
+            // Print registered icon
+            if (gSaveBlock1Ptr->equippedArmor != ITEM_NONE && gSaveBlock1Ptr->equippedArmor == itemSlot.itemId)
+                BlitBitmapToWindow(windowId, sRegisteredSelect_Gfx, 96, y - 1, 24, 16);
+        } 
+        else if (gBagPosition.pocket == POCKET_CLOAKS){
+            // Print registered icon
+            if (gSaveBlock1Ptr->equippedCloak != ITEM_NONE && gSaveBlock1Ptr->equippedCloak == itemSlot.itemId)
+                BlitBitmapToWindow(windowId, sRegisteredSelect_Gfx, 96, y - 1, 24, 16);
+        }
+        else if (gBagPosition.pocket != POCKET_KEY_ITEMS && GetItemImportance(itemSlot.itemId) == FALSE)
         {
             // Print item quantity
             ConvertIntToDecimalStringN(gStringVar1, itemSlot.quantity, STR_CONV_MODE_RIGHT_ALIGN, MAX_ITEM_DIGITS);
@@ -1776,6 +1821,34 @@ static void OpenContextMenu(u8 taskId)
                 gBagMenu->contextMenuItemsPtr = sContextMenuItems_BerriesPocket;
                 gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_BerriesPocket);
                 break;
+            case POCKET_WEAPONS:
+                gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
+                gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_WeaponsPocket);
+                memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_WeaponsPocket, sizeof(sContextMenuItems_WeaponsPocket));
+                if (gSaveBlock1Ptr->equippedWeapon == gSpecialVar_ItemId)
+                    gBagMenu->contextMenuItemsBuffer[0] = ACTION_UNEQUIP;
+                break;
+            case POCKET_ARMOR:
+                gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
+                gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_ArmorPocket);
+                memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_ArmorPocket, sizeof(sContextMenuItems_ArmorPocket));
+                if (gSaveBlock1Ptr->equippedArmor == gSpecialVar_ItemId)
+                    gBagMenu->contextMenuItemsBuffer[0] = ACTION_UNEQUIP;
+                break;
+            case POCKET_HELMS:
+                gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
+                gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_HelmsPocket);
+                memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_HelmsPocket, sizeof(sContextMenuItems_HelmsPocket));
+                if (gSaveBlock1Ptr->equippedHelm == gSpecialVar_ItemId)
+                    gBagMenu->contextMenuItemsBuffer[0] = ACTION_UNEQUIP;
+                break;
+            case POCKET_CLOAKS:
+                gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
+                gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_CloaksPocket);
+                memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_CloaksPocket, sizeof(sContextMenuItems_CloaksPocket));
+                if (gSaveBlock1Ptr->equippedCloak == gSpecialVar_ItemId)
+                    gBagMenu->contextMenuItemsBuffer[0] = ACTION_UNEQUIP;
+                break;
             }
         }
     }
@@ -2055,6 +2128,44 @@ static void ItemMenu_Register(u8 taskId)
         gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     else
         gSaveBlock1Ptr->registeredItem = gSpecialVar_ItemId;
+    DestroyListMenuTask(tListTaskId, scrollPos, cursorPos);
+    LoadBagItemListBuffers(gBagPosition.pocket);
+    tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
+    ScheduleBgCopyTilemapToVram(0);
+    ItemMenu_Cancel(taskId);
+}
+static void ItemMenu_Equip(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
+    u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
+    switch (gBagPosition.pocket)
+    {
+    case POCKET_WEAPONS:
+        if (gSaveBlock1Ptr->equippedWeapon == gSpecialVar_ItemId)
+            gSaveBlock1Ptr->equippedWeapon = ITEM_NONE;
+        else
+            gSaveBlock1Ptr->equippedWeapon = gSpecialVar_ItemId;
+        break;
+    case POCKET_ARMOR:
+        if (gSaveBlock1Ptr->equippedArmor == gSpecialVar_ItemId)
+            gSaveBlock1Ptr->equippedArmor = ITEM_NONE;
+        else
+            gSaveBlock1Ptr->equippedArmor = gSpecialVar_ItemId;
+        break;
+    case POCKET_HELMS:
+        if (gSaveBlock1Ptr->equippedHelm == gSpecialVar_ItemId)
+            gSaveBlock1Ptr->equippedHelm = ITEM_NONE;
+        else
+            gSaveBlock1Ptr->equippedHelm = gSpecialVar_ItemId;
+        break;
+    case POCKET_CLOAKS:
+        if (gSaveBlock1Ptr->equippedCloak == gSpecialVar_ItemId)
+            gSaveBlock1Ptr->equippedCloak = ITEM_NONE;
+        else
+            gSaveBlock1Ptr->equippedCloak = gSpecialVar_ItemId;
+        break;
+    }
     DestroyListMenuTask(tListTaskId, scrollPos, cursorPos);
     LoadBagItemListBuffers(gBagPosition.pocket);
     tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
