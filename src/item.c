@@ -833,6 +833,11 @@ const u8 *GetItemName(u16 itemId)
     return name == NULL ? gQuestionMarksItemName : name;
 }
 
+const u8 GetItemStat(u16 itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].statValue;
+}
+
 u32 GetItemPrice(u16 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].price;

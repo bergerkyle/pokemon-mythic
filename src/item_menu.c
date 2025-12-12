@@ -2166,6 +2166,8 @@ static void ItemMenu_Equip(u8 taskId)
             gSaveBlock1Ptr->equippedCloak = gSpecialVar_ItemId;
         break;
     }
+    for(u16 i = 0; i < ARRAY_COUNT(gPlayerParty); i++)
+        CalculateMonStats(&gPlayerParty[i]);
     DestroyListMenuTask(tListTaskId, scrollPos, cursorPos);
     LoadBagItemListBuffers(gBagPosition.pocket);
     tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);

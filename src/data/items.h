@@ -155,6 +155,7 @@ const struct Item gItemsInfo[] =
     {
         .name = gQuestionMarksItemName,
         .price = 0,
+        .statValue = 0,
         .description = sQuestionMarksDesc,
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_UNCATEGORIZED,
@@ -14776,6 +14777,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_WEAPONS,
         .type = ITEM_USE_BAG_MENU,
         .sortType = ITEM_TYPE_SELLABLE,
+        .statValue = 80,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .iconPic = gItemIcon_MasterBlade,
         .iconPalette = gItemIconPalette_MasterBlade,

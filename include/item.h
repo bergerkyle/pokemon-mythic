@@ -96,6 +96,7 @@ struct Item
     const u8 *effect;
     const u8 *name;
     const u8 *pluralName;
+    const u8 statValue;
     u8 holdEffect;
     u8 holdEffectParam;
     u8 importance:2;
@@ -248,6 +249,7 @@ u32 GetItemFlingPower(u32 itemId);
 u32 GetItemStatus1Mask(u16 itemId);
 bool32 ItemHasVolatileFlag(u16 itemId, enum Volatile volatile);
 u32 GetItemSellPrice(u32 itemId);
+const u8 GetItemStat(u16 itemId);
 bool32 IsHoldEffectChoice(enum ItemHoldEffect holdEffect);
 
 #endif // GUARD_ITEM_H
