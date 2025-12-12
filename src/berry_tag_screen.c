@@ -1,6 +1,7 @@
 #include "global.h"
 #include "berry_tag_screen.h"
 #include "berry.h"
+#include "berry_pouch.h"
 #include "decompress.h"
 #include "event_object_movement.h"
 #include "item_menu.h"
@@ -43,9 +44,11 @@ struct BerryTagScreenStruct
 {
     u16 tilemapBuffers[3][0x400];
     u16 berryId;
+    u16 currentSpriteBerryId;
     u8 berrySpriteId;
     u8 flavorCircleIds[FLAVOR_COUNT];
     u16 gfxState;
+    bool8 fromBerryPouch;
 };
 
 // EWRAM vars
@@ -181,11 +184,23 @@ static const u8 sText_BerryTag[] = _("BERRY TAG");
 static const u8 sText_ThreeMarks[] = _("???");
 
 // code
-void DoBerryTagScreen(void)
+static void DoBerryTagScreenCheckPouch(bool32 fromBerryPouch)
 {
     sBerryTag = AllocZeroed(sizeof(*sBerryTag));
     sBerryTag->berryId = ItemIdToBerryType(gSpecialVar_ItemId);
+    sBerryTag->fromBerryPouch = fromBerryPouch;
     SetMainCallback2(CB2_InitBerryTagScreen);
+}
+
+// code
+void DoBerryTagScreen(void)
+{
+    DoBerryTagScreenCheckPouch(FALSE);
+}
+
+void DoBerryTagScreenFromPouch(void)
+{
+    DoBerryTagScreenCheckPouch(TRUE);
 }
 
 static void CB2_BerryTagScreen(void)
@@ -334,12 +349,12 @@ static bool8 LoadBerryTagGfx(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(gBerryTag_Gfx, sBerryTag->tilemapBuffers[0]);
+            DecompressDataWithHeaderWram(gBerryTag_Gfx, sBerryTag->tilemapBuffers[0]);
             sBerryTag->gfxState++;
         }
         break;
     case 2:
-        LZDecompressWram(gBerryTag_Pal, sBerryTag->tilemapBuffers[2]);
+        DecompressDataWithHeaderWram(gBerryTag_Tilemap, sBerryTag->tilemapBuffers[2]);
         sBerryTag->gfxState++;
         break;
     case 3:
@@ -357,7 +372,7 @@ static bool8 LoadBerryTagGfx(void)
         sBerryTag->gfxState++;
         break;
     case 4:
-        LoadCompressedPalette(gBerryCheck_Pal, BG_PLTT_ID(0), 6 * PLTT_SIZE_4BPP);
+        LoadPalette(gBerryCheck_Pal, BG_PLTT_ID(0), 6 * PLTT_SIZE_4BPP);
         sBerryTag->gfxState++;
         break;
     case 5:
@@ -365,7 +380,7 @@ static bool8 LoadBerryTagGfx(void)
         sBerryTag->gfxState++;
         break;
     default:
-        LoadCompressedSpritePalette(&gBerryCheckCirclePaletteTable);
+        LoadSpritePalette(&gBerryCheckCirclePaletteTable);
         return TRUE; // done
     }
 
@@ -466,13 +481,13 @@ static void PrintBerryDescription2(void)
 
 static void CreateBerrySprite(void)
 {
-    sBerryTag->berrySpriteId = CreateBerryTagSprite(sBerryTag->berryId - 1, 56, 64);
+    sBerryTag->currentSpriteBerryId = sBerryTag->berryId - 1;
+    sBerryTag->berrySpriteId = CreateBerryTagSprite(sBerryTag->currentSpriteBerryId, 56, 64);
 }
 
 static void DestroyBerrySprite(void)
 {
-    DestroySprite(&gSprites[sBerryTag->berrySpriteId]);
-    FreeBerryTagSpritePalette();
+    DestroyBerryIconSprite(sBerryTag->berrySpriteId, sBerryTag->currentSpriteBerryId, TRUE);
 }
 
 static void CreateFlavorCircleSprites(void)
@@ -529,15 +544,23 @@ static void PrepareToCloseBerryTagScreen(u8 taskId)
     gTasks[taskId].func = Task_CloseBerryTagScreen;
 }
 
+static void CB2_ReturnToBerryPouchMenu(void)
+{
+    InitBerryPouch(BERRYPOUCH_REOPENING, NULL, BERRYPOUCH_KEEP_PREV);
+}
+
 static void Task_CloseBerryTagScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         DestroyBerrySprite();
         DestroyFlavorCircleSprites();
+        if (sBerryTag->fromBerryPouch)
+            SetMainCallback2(CB2_ReturnToBerryPouchMenu);
+        else
+            SetMainCallback2(CB2_ReturnToBagMenuPocket);
         Free(sBerryTag);
         FreeAllWindowBuffers();
-        SetMainCallback2(CB2_ReturnToBagMenuPocket);
         DestroyTask(taskId);
     }
 }
@@ -562,9 +585,9 @@ static void Task_HandleInput(u8 taskId)
 static void TryChangeDisplayedBerry(u8 taskId, s8 toMove)
 {
     s16 *data = gTasks[taskId].data;
-    s16 currPocketPosition = gBagPosition.scrollPosition[BERRIES_POCKET] + gBagPosition.cursorPosition[BERRIES_POCKET];
+    s16 currPocketPosition = gBagPosition.scrollPosition[POCKET_BERRIES] + gBagPosition.cursorPosition[POCKET_BERRIES];
     u32 newPocketPosition = currPocketPosition + toMove;
-    if (newPocketPosition < ITEM_TO_BERRY(LAST_BERRY_INDEX) && BagGetItemIdByPocketPosition(POCKET_BERRIES, newPocketPosition) != ITEM_NONE)
+    if (newPocketPosition < ITEM_TO_BERRY(LAST_BERRY_INDEX) && GetBagItemId(POCKET_BERRIES, newPocketPosition) != ITEM_NONE)
     {
         if (toMove < 0)
             tBgOp = BG_COORD_SUB;
@@ -580,11 +603,11 @@ static void TryChangeDisplayedBerry(u8 taskId, s8 toMove)
 
 static void HandleBagCursorPositionChange(s8 toMove)
 {
-    u16 *scrollPos = &gBagPosition.scrollPosition[BERRIES_POCKET];
-    u16 *cursorPos = &gBagPosition.cursorPosition[BERRIES_POCKET];
+    u16 *scrollPos = &gBagPosition.scrollPosition[POCKET_BERRIES];
+    u16 *cursorPos = &gBagPosition.cursorPosition[POCKET_BERRIES];
     if (toMove > 0)
     {
-        if (*cursorPos < 4 || BagGetItemIdByPocketPosition(POCKET_BERRIES, *scrollPos + 8) == 0)
+        if (*cursorPos < 4 || GetBagItemId(POCKET_BERRIES, *scrollPos + 8) == 0)
             *cursorPos += toMove;
         else
             *scrollPos += toMove;
@@ -597,7 +620,7 @@ static void HandleBagCursorPositionChange(s8 toMove)
             *scrollPos += toMove;
     }
 
-    sBerryTag->berryId = ItemIdToBerryType(BagGetItemIdByPocketPosition(POCKET_BERRIES, *scrollPos + *cursorPos));
+    sBerryTag->berryId = ItemIdToBerryType(GetBagItemId(POCKET_BERRIES, *scrollPos + *cursorPos));
 }
 
 #define DISPLAY_SPEED 16
