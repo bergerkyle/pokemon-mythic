@@ -622,11 +622,11 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
         {
             if (gSaveBlock2Ptr->playerGender == MALE)
             {
-                LZDecompressWram(sMainBgTilemap, sBg1TilemapBuffer);
+                DecompressDataWithHeaderWram(sMainBgTilemap, sBg1TilemapBuffer);
             }
             else
             {
-                LZDecompressWram(sMainBgTilemapFem, sBg1TilemapBuffer);
+                DecompressDataWithHeaderWram(sMainBgTilemapFem, sBg1TilemapBuffer);
             }
             sMainMenuDataPtr->gfxLoadState++;
         }
@@ -639,7 +639,7 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
     case 3:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sScrollBgTilemap, sBg2TilemapBuffer);
+            DecompressDataWithHeaderWram(sScrollBgTilemap, sBg2TilemapBuffer);
             sMainMenuDataPtr->gfxLoadState++;
         }
         break;
@@ -766,7 +766,6 @@ static void CreatePartyMonIcons()
     u8 i = 0;
     s16 x = ICON_BOX_1_START_X;
     s16 y = ICON_BOX_1_START_Y;
-    struct Pokemon *mon;
     LoadMonIconPalettes();
     for(i = 0; i < gPlayerPartyCount; i++)
     {   
