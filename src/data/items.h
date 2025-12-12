@@ -14766,14 +14766,31 @@ const struct Item gItemsInfo[] =
 
 // WEAPONS
 
+    [ITEM_IRON_SWORD] =
+    {
+        .name = ITEM_NAME("Iron Sword"),
+        .price = 800,
+        .description = COMPOUND_STRING(
+            "A basic iron\n"
+            "sword. \n"
+            "+4 ATK / SP ATK."),
+        .pocket = POCKET_WEAPONS,
+        .type = ITEM_USE_BAG_MENU,
+        .sortType = ITEM_TYPE_SELLABLE,
+        .statValue = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_IronSword,
+        .iconPalette = gItemIconPalette_IronItem,
+    },
+
     [ITEM_MASTER_BLADE] =
     {
         .name = ITEM_NAME("Master Blade"),
-        .price = 2000,
+        .price = 16000,
         .description = COMPOUND_STRING(
             "A legendary\n"
-            "blade from Elfnir\n"
-            "+80 ATK / SP ATK."),
+            "blade from Elfnir.\n"
+            "+80 ATK / SP ATK"),
         .pocket = POCKET_WEAPONS,
         .type = ITEM_USE_BAG_MENU,
         .sortType = ITEM_TYPE_SELLABLE,
@@ -14781,6 +14798,63 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .iconPic = gItemIcon_MasterBlade,
         .iconPalette = gItemIconPalette_MasterBlade,
+    },
+
+// Helms
+
+    [ITEM_IRON_HELM] =
+    {
+        .name = ITEM_NAME("Iron Helm"),
+        .price = 400,
+        .description = COMPOUND_STRING(
+            "A basic iron\n"
+            "helmet.\n"
+            "+4 HP"),
+        .pocket = POCKET_HELMS,
+        .type = ITEM_USE_BAG_MENU,
+        .sortType = ITEM_TYPE_SELLABLE,
+        .statValue = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_IronHelm,
+        .iconPalette = gItemIconPalette_IronItem,
+    },
+
+// Armor
+
+    [ITEM_IRON_ARMOR] =
+    {
+        .name = ITEM_NAME("Iron Armor"),
+        .price = 800,
+        .description = COMPOUND_STRING(
+            "A basic set of\n"
+            "iron armor.\n"
+            "+4 DEF / SP DEF"),
+        .pocket = POCKET_ARMOR,
+        .type = ITEM_USE_BAG_MENU,
+        .sortType = ITEM_TYPE_SELLABLE,
+        .statValue = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_IronArmor,
+        .iconPalette = gItemIconPalette_IronItem,
+    },
+
+// Cloaks
+
+    [ITEM_OLD_CLOAK] =
+    {
+        .name = ITEM_NAME("Old Cloak"),
+        .price = 400,
+        .description = COMPOUND_STRING(
+            "An old, well-worn\n"
+            "cloak.\n"
+            "+4 SPD"),
+        .pocket = POCKET_CLOAKS,
+        .type = ITEM_USE_BAG_MENU,
+        .sortType = ITEM_TYPE_SELLABLE,
+        .statValue = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_OldCloak,
+        .iconPalette = gItemIconPalette_IronItem,
     },
 };
 

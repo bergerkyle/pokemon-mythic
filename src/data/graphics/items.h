@@ -2102,3 +2102,9 @@ const u16 gItemIconPalette_TwiceSpicedRadish[] = INCBIN_U16("graphics/items/icon
 
 const u32 gItemIcon_MasterBlade[] = INCBIN_U32("graphics/items/icons/master_blade.4bpp.smol");
 const u16 gItemIconPalette_MasterBlade[] = INCBIN_U16("graphics/items/icon_palettes/master_blade.gbapal");
+
+const u32 gItemIcon_IronSword[] = INCBIN_U32("graphics/items/icons/iron_sword.4bpp.smol");
+const u32 gItemIcon_IronArmor[] = INCBIN_U32("graphics/items/icons/iron_armor.4bpp.smol");
+const u32 gItemIcon_IronHelm[] = INCBIN_U32("graphics/items/icons/iron_helm.4bpp.smol");
+const u32 gItemIcon_OldCloak[] = INCBIN_U32("graphics/items/icons/old_cloak.4bpp.smol");
+const u16 gItemIconPalette_IronItem[] = INCBIN_U16("graphics/items/icon_palettes/iron_item.gbapal");

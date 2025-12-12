@@ -1745,6 +1745,12 @@ extern const u16 gItemIconPalette_ReturnToFieldArrow[];
 extern const u32 gItemIcon_MasterBlade[];
 extern const u16 gItemIconPalette_MasterBlade[];
 
+extern const u32 gItemIcon_IronSword[];
+extern const u32 gItemIcon_IronArmor[];
+extern const u32 gItemIcon_IronHelm[];
+extern const u32 gItemIcon_OldCloak[];
+extern const u16 gItemIconPalette_IronItem[];
+
 //menu graphics
 extern const u16 gMenuInfoElements1_Pal[16];
 extern const u16 gMenuInfoElements2_Pal[16];
