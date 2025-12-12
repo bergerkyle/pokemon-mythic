@@ -1055,6 +1055,10 @@ struct Bag
     struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
     struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
     struct ItemSlot berries[BAG_BERRIES_COUNT];
+    struct ItemSlot weapons[BAG_WEAPONS_COUNT];
+    struct ItemSlot armor[BAG_ARMOR_COUNT];
+    struct ItemSlot helms[BAG_HELMS_COUNT];
+    struct ItemSlot cloaks[BAG_CLOAKS_COUNT];
 };
 
 struct SaveBlock1
@@ -1082,6 +1086,10 @@ struct SaveBlock1
     /*0x560 -> 0x848 is bag storage*/
     /*0x560*/ struct Bag bag;
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
+    /*0x494*/ u16 equippedWeapon;
+    /*0x494*/ u16 equippedHelm;
+    /*0x494*/ u16 equippedCloak;
+    /*0x494*/ u16 equippedArmor;
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1 == FALSE
     /*0x988*/ u8 filler1[0x34]; // Previously Dex Flags, feel free to remove.
 #endif //FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1

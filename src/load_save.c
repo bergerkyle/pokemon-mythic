@@ -258,19 +258,6 @@ void LoadPlayerBag(void)
     // load player bag.
     memcpy(&gLoadedSaveData.bag, &gSaveBlock1Ptr->bag, sizeof(struct Bag));
 
-    // load player berries.
-    for (i = 0; i < BAG_WEAPONS_COUNT; i++)
-        gLoadedSaveData.weapons[i] = gSaveBlock1Ptr->bagPocket_Weapons[i];
-    // load player berries.
-    for (i = 0; i < BAG_CLOAKS_COUNT; i++)
-        gLoadedSaveData.cloaks[i] = gSaveBlock1Ptr->bagPocket_Cloaks[i];
-    // load player berries.
-    for (i = 0; i < BAG_ARMOR_COUNT; i++)
-        gLoadedSaveData.armor[i] = gSaveBlock1Ptr->bagPocket_Armor[i];
-    // load player berries.
-    for (i = 0; i < BAG_HELMS_COUNT; i++)
-        gLoadedSaveData.helms[i] = gSaveBlock1Ptr->bagPocket_Helms[i];
-
     // load mail.
     for (i = 0; i < MAIL_COUNT; i++)
         gLoadedSaveData.mail[i] = gSaveBlock1Ptr->mail[i];
@@ -285,21 +272,6 @@ void SavePlayerBag(void)
 
     // save player bag.
     memcpy(&gSaveBlock1Ptr->bag, &gLoadedSaveData.bag, sizeof(struct Bag));
-
-    // save player berries.
-    for (i = 0; i < BAG_WEAPONS_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Weapons[i] = gLoadedSaveData.weapons[i];
-
-    // save player berries.
-    for (i = 0; i < BAG_CLOAKS_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Cloaks[i] = gLoadedSaveData.cloaks[i];
-    // save player berries.
-    for (i = 0; i < BAG_ARMOR_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Armor[i] = gLoadedSaveData.armor[i];
-
-    // save player berries.
-    for (i = 0; i < BAG_BERRIES_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Berries[i] = gLoadedSaveData.berries[i];
 
     // save mail.
     for (i = 0; i < MAIL_COUNT; i++)

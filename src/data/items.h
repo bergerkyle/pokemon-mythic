@@ -14767,7 +14767,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_MASTER_BLADE] =
     {
-        .name = _("Master Blade"),
+        .name = ITEM_NAME("Master Blade"),
         .price = 2000,
         .description = COMPOUND_STRING(
             "A legendary\n"
@@ -14775,6 +14775,7 @@ const struct Item gItemsInfo[] =
             "+80 ATK / SP ATK."),
         .pocket = POCKET_WEAPONS,
         .type = ITEM_USE_BAG_MENU,
+        .sortType = ITEM_TYPE_SELLABLE,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .iconPic = gItemIcon_MasterBlade,
         .iconPalette = gItemIconPalette_MasterBlade,

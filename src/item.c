@@ -96,6 +96,10 @@ struct ItemSlot NONNULL BagPocket_GetSlotData(struct BagPocket *pocket, u32 pock
     case POCKET_KEY_ITEMS:
     case POCKET_POKE_BALLS:
     case POCKET_TM_HM:
+    case POCKET_WEAPONS:
+    case POCKET_HELMS:
+    case POCKET_ARMOR:
+    case POCKET_CLOAKS:
     case POCKET_BERRIES:
         return BagPocket_GetSlotDataGeneric(pocket, pocketPos);
     case POCKET_DUMMY:
@@ -119,6 +123,10 @@ void NONNULL BagPocket_SetSlotData(struct BagPocket *pocket, u32 pocketPos, stru
     case POCKET_KEY_ITEMS:
     case POCKET_POKE_BALLS:
     case POCKET_TM_HM:
+    case POCKET_WEAPONS:
+    case POCKET_HELMS:
+    case POCKET_ARMOR:
+    case POCKET_CLOAKS:
     case POCKET_BERRIES:
         BagPocket_SetSlotDataGeneric(pocket, pocketPos, newSlot);
         break;
@@ -161,17 +169,20 @@ void SetBagItemsPointers(void)
     gBagPockets[POCKET_BERRIES].capacity = BAG_BERRIES_COUNT;
     gBagPockets[POCKET_BERRIES].id = POCKET_BERRIES;
 
-    gBagPockets[WEAPONS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Weapons;
-    gBagPockets[WEAPONS_POCKET].capacity = BAG_WEAPONS_COUNT;
+    gBagPockets[POCKET_WEAPONS].itemSlots = gSaveBlock1Ptr->bag.weapons;
+    gBagPockets[POCKET_WEAPONS].capacity = BAG_WEAPONS_COUNT;
+    gBagPockets[POCKET_WEAPONS].id = POCKET_WEAPONS;
 
-    gBagPockets[CLOAKS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Cloaks;
-    gBagPockets[CLOAKS_POCKET].capacity = BAG_CLOAKS_COUNT;
+    gBagPockets[POCKET_CLOAKS].itemSlots = gSaveBlock1Ptr->bag.cloaks;
+    gBagPockets[POCKET_CLOAKS].capacity = BAG_CLOAKS_COUNT;
+    gBagPockets[POCKET_CLOAKS].id = POCKET_CLOAKS;
 
-    gBagPockets[ARMOR_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Armor;
-    gBagPockets[ARMOR_POCKET].capacity = BAG_ARMOR_COUNT;
-
-    gBagPockets[HELMS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Helms;
-    gBagPockets[HELMS_POCKET].capacity = BAG_HELMS_COUNT;
+    gBagPockets[POCKET_ARMOR].itemSlots = gSaveBlock1Ptr->bag.armor;
+    gBagPockets[POCKET_ARMOR].capacity = BAG_ARMOR_COUNT;
+    gBagPockets[POCKET_ARMOR].id = POCKET_ARMOR;
+    gBagPockets[POCKET_HELMS].itemSlots = gSaveBlock1Ptr->bag.helms;
+    gBagPockets[POCKET_HELMS].capacity = BAG_HELMS_COUNT;
+    gBagPockets[POCKET_HELMS].id = POCKET_HELMS;
 }
 
 u8 *CopyItemName(u16 itemId, u8 *dst)
