@@ -1905,7 +1905,7 @@ void ExtractMonSkillEvData(struct Pokemon *mon, struct PokeSummary *sum)
     sum->speed = GetMonData(mon, MON_DATA_SPEED_EV);
 }
 
-u32 GetRelearnMovesCount(enum MoveRelearnerStates state)
+static u32 GetRelearnMovesCount(enum MoveRelearnerStates state)
 {
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
 
@@ -1924,12 +1924,12 @@ u32 GetRelearnMovesCount(enum MoveRelearnerStates state)
     }
 }
 
-u32 GetCurrentRelearnMovesCount(void)
+static u32 GetCurrentRelearnMovesCount(void)
 {
     return GetRelearnMovesCount(gMoveRelearnerState);
 }
 
-bool32 NoMovesAvailableToRelearn(void)
+static bool32 NoMovesAvailableToRelearn(void)
 {
     u32 zeroCounter = 0;
     for (enum MoveRelearnerStates state = MOVE_RELEARNER_LEVEL_UP_MOVES; state < MOVE_RELEARNER_COUNT; state++)
