@@ -2252,10 +2252,11 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
     for (i = 0; i < scale; i++)
         pixelsArray[i] = 0;
 
+    // Safe Div, because 2vs1 battles can have maxValue 0.
     if (maxValue < totalPixels)
-        pixels = (*currValue * totalPixels / maxValue) >> 8;
+        pixels = SAFE_DIV(*currValue * totalPixels, maxValue) >> 8;
     else
-        pixels = *currValue * totalPixels / maxValue;
+        pixels = SAFE_DIV(*currValue * totalPixels, maxValue);
 
     filledPixels = pixels;
 
@@ -2576,7 +2577,7 @@ static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
                         9, 11, 1);
 }
 
-static void PrintAbilityOnAbilityPopUp(u32 ability, u8 spriteId1, u8 spriteId2)
+static void PrintAbilityOnAbilityPopUp(enum Ability ability, u8 spriteId1, u8 spriteId2)
 {
     ClearAbilityName(spriteId1, spriteId2);
     PrintOnAbilityPopUp(gAbilitiesInfo[ability].name,
@@ -2711,15 +2712,12 @@ static inline bool32 IsAnyAbilityPopUpActive(void)
     return FALSE;
 }
 
-void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
+void CreateAbilityPopUp(u8 battler, enum Ability ability, bool32 isDoubleBattle)
 {
     const s16 (*coords)[2];
     u8 spriteId1, spriteId2, battlerPosition, taskId;
 
-    if (B_ABILITY_POP_UP == FALSE)
-        return;
-
-    if (gBattleScripting.abilityPopupOverwrite != 0)
+    if (gBattleScripting.abilityPopupOverwrite)
         ability = gBattleScripting.abilityPopupOverwrite;
 
     if (gTestRunnerEnabled)
@@ -2793,12 +2791,10 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
 
 void UpdateAbilityPopup(u8 battlerId)
 {
-    u8 spriteId1 = gBattleStruct->abilityPopUpSpriteIds[battlerId][0];
-    u8 spriteId2 = gBattleStruct->abilityPopUpSpriteIds[battlerId][1];
-    u16 ability = (gBattleScripting.abilityPopupOverwrite != 0) ? gBattleScripting.abilityPopupOverwrite : gBattleMons[battlerId].ability;
-
-    PrintAbilityOnAbilityPopUp(ability, spriteId1, spriteId2);
-    RestoreOverwrittenPixels((void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32));
+    u8 *spriteIds = gBattleStruct->abilityPopUpSpriteIds[battler];
+    enum Ability ability = (gBattleScripting.abilityPopupOverwrite) ? gBattleScripting.abilityPopupOverwrite
+                                                           : gBattleMons[battler].ability;
+    PrintAbilityOnAbilityPopUp(ability, spriteIds[0], spriteIds[1]);
 }
 
 #define FRAMES_TO_WAIT 48
@@ -3029,8 +3025,9 @@ void TryAddLastUsedBallItemSprites(void)
 
 static void DestroyLastUsedBallWinGfx(struct Sprite *sprite)
 {
-    FreeSpriteTilesByTag(LAST_BALL_WINDOW_TAG);
-    FreeSpritePaletteByTag(ABILITY_POP_UP_TAG);
+    FreeSpriteTilesByTag(TAG_LAST_BALL_WINDOW);
+    if (GetSpriteTileStartByTag(MOVE_INFO_WINDOW_TAG) == 0xFFFF)
+        FreeSpritePaletteByTag(TAG_ABILITY_POP_UP);
     DestroySprite(sprite);
     gBattleStruct->ballSpriteIds[1] = MAX_SPRITES;
 }
@@ -3066,7 +3063,8 @@ void TryToHideMoveInfoWindow(void)
 static void DestroyMoveInfoWinGfx(struct Sprite *sprite)
 {
     FreeSpriteTilesByTag(MOVE_INFO_WINDOW_TAG);
-    FreeSpritePaletteByTag(ABILITY_POP_UP_TAG);
+    if (GetSpriteTileStartByTag(TAG_LAST_BALL_WINDOW) == 0xFFFF)
+        FreeSpritePaletteByTag(TAG_ABILITY_POP_UP);
     DestroySprite(sprite);
     gBattleStruct->moveInfoSpriteId = MAX_SPRITES;
 }
