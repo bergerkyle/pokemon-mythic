@@ -24,35 +24,65 @@ If you use **`pokeemerald-expansion`**, please credit **RHH (Rom Hacking Hideout
 ```
 Based off RHH's pokeemerald-expansion 1.14.1 https://github.com/rh-hideout/pokeemerald-expansion/
 ```
+These are some of the tools I've made for my hack, aiming to provide a framework to develop your own overworld encounter feature. These rely heavily on **merrp**'s followers branch, so credit goes to them as well as the maintainers who have been recently added it to **pokeemerald-expansion**.
 
-Please consider [crediting all contributors](CREDITS.md) involved in the project!
+> **Note**: This branch tracks **pret**'s **pokeemerald**. Please cherry-pick the linked commits or copy them directly.
 
-# Choosing `pokeemerald` or **`pokeemerald-expansion`**
+## Features
+- [x] Create a wander in grass movement type for overworld encounters. [Found here](https://github.com/Pawkkie/Team-Aquas-Asset-Repo/wiki/Create-Wander-in-Grass-Movement-Type).
+- [x] Create a way to start a wild encounter based on an overworld mon object event, without having to specify the species in a script.
+- [x] Create a way to specify the species of an overworld mon object event from a list of species.
+- [x] Create a way to specify the species of an overworld mon object event from map wild encounter tables.
 
-- **`pokeemerald-expansion`** supports multiplayer functionality with other games built on **`pokeemerald-expansion`**. It is not compatible with official Pokémon games.
-- If compatibility with official games is important, use [`pokeemerald`](https://github.com/pret/pokeemerald). Otherwise, we recommend using **`pokeemerald-expansion`**.
-- **`pokeemerald-expansion`** incorporates regular updates from `pokeemerald`, including bug fixes and documentation improvements.
+### Example - Petalburg Good Rod Encounters
+![](https://github.com/HashtagMarky/pokeemerald/blob/ikigai/ow-encounters/ikiagi_ow_encounters.gif)
 
-# [Getting Started](INSTALL.md)
+#### .inc format
+```
+.set LOCALID_OW_MON 1
 
-❗❗ **Important**: Do not use GitHub's "Download Zip" option as it will not include commit history. This is necessary if you want to update or merge other feature branches. 
+PetalburgCity_MapScripts::
+    map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_OnTransition
+    .byte 0
 
 If you're new to git and GitHub, [Team Aqua's Asset Repo](https://github.com/Pawkkie/Team-Aquas-Asset-Repo/) has a [guide to forking and cloning the repository](https://github.com/Pawkkie/Team-Aquas-Asset-Repo/wiki/The-Basics-of-GitHub). Then you can follow one of the following guides:
 
-## 📥 [Installing **`pokeemerald-expansion`**](INSTALL.md)
-## 🏗️ [Building **`pokeemerald-expansion`**](INSTALL.md#Building-pokeemerald-expansion)
-## 🚚 [Migrating from **`pokeemerald`**](INSTALL.md#Migrating-from-pokeemerald)
-## 🚀 [Updating **`pokeemerald-expansion`**](INSTALL.md#Updating-pokeemerald-expansion)
+PetalburgCity_EventScript_OverworldMon::
+    lock
+    callnative GetOverworldMonSpecies
+    bufferspeciesname STR_VAR_1, VAR_0x8004
+    msgbox PetalburgCity_Text_OverworldMon, MSGBOX_DEFAULT
+    closemessage
+    startoverworldencounter 5
+    release
+    end
+```
 
-# [Documentation](https://rh-hideout.github.io/pokeemerald-expansion/)
+#### .pory format
+```
+const LOCALID_OW_MON = 1
 
-For detailed documentation, visit the [pokeemerald-expansion documentation page](https://rh-hideout.github.io/pokeemerald-expansion/).
+mapscript PetalburgCity_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION: PetalburgCity_OnTransition
+}
 
-# [Contributions](CONTRIBUTING.md)
-If you are looking to [report a bug](CONTRIBUTING.md#Bug-Report), [open a pull request](CONTRIBUTING.md#Pull-Requests), or [request a feature](CONTRIBUTING.md#Feature-Request), our [`CONTRIBUTING.md`](CONTRIBUTING.md) has guides for each.
+script PetalburgCity_OnTransition
+{
+    setobjectaswildencounter(LOCALID_OW_MON, ENCOUNTER_GOOD_ROD)
+}
 
-# [Community](https://discord.gg/6CzjAG6GZk)
+PetalburgCity_EventScript_OverworldMon::
+    lock
+    callnative(GetOverworldMonSpecies)
+    bufferspeciesname(STR_VAR_1, VAR_0x8004)
+    msgbox(PetalburgCity_Text_OverworldMon, MSGBOX_DEFAULT)
+    closemessage
+    startoverworldencounter(5)
+    release
+    end
+```
 
-[![](https://dcbadge.limes.pink/api/server/6CzjAG6GZk)](https://discord.gg/6CzjAG6GZk)
+For help setting up mapscripts, please see the [Team Aqua's Hideout Video Tutorial](https://youtu.be/b7AQP6WND-4?si=7q06ybC2k65GkQI6), and if you need it, the [poryscript guide](https://github.com/huderlem/poryscript#mapscripts-statement).
 
 Our community uses the [ROM Hacking Hideout (RHH) Discord server](https://discord.gg/6CzjAG6GZk) to communicate and organize. Most of our discussions take place there, and we welcome anybody to join us!
