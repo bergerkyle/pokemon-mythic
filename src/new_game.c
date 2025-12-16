@@ -224,6 +224,7 @@ void NewGameInitData(void)
     ResetOutfitData();
     ResetDexNav();
     ClearFollowerNPCData();
+    gSaveBlock3Ptr->followerIndex = OW_FOLLOWER_NOT_SET;
 }
 
 static void ResetMiniGamesRecords(void)
