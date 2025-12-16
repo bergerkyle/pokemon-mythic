@@ -872,6 +872,7 @@ struct
 	[MENU_TM_MOVES]        = {COMPOUND_STRING("TM MOVES"),        CursorCb_ChangeTMMoves},
 	[MENU_TUTOR_MOVES]     = {COMPOUND_STRING("TUTOR MOVES"),     CursorCb_ChangeTutorMoves},
     [MENU_SUB_MOVES]       = {COMPOUND_STRING("LEARN MOVES"),     CursorCb_LearnMovesSubMenu},
+    [MENU_SUMMARY] = {gText_Summary, CursorCb_Summary},
     [MENU_SWITCH] = {gText_Switch2, CursorCb_Switch},
     [MENU_CANCEL1] = {gText_Cancel2, CursorCb_Cancel1},
     [MENU_ITEM] = {gText_Item, CursorCb_Item},

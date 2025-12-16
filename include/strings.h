@@ -2429,6 +2429,26 @@ extern const u8 gText_FollowerPreferred[];
 extern const u8 gText_FollowerDefaulted[];
 extern const u8 gText_FollowerFainted[];
 extern const u8 gText_FollowerReturnedToBall[];
+extern const u8 gText_Switch2[];
+extern const u8 gText_Item[];
+extern const u8 gText_Take[];
+extern const u8 gText_Mail[];
+extern const u8 gText_Take2[];
+extern const u8 gText_Read2[];
+extern const u8 gText_Shift[];
+extern const u8 gText_SendOut[];
+extern const u8 gText_Enter[];
+extern const u8 gText_Store[];
+extern const u8 gText_NoEntry[];
+extern const u8 gText_Trade4[];
+extern const u8 gText_LightBulb[];
+extern const u8 gText_MicrowaveOven[];
+extern const u8 gText_WashingMachine[];
+extern const u8 gText_Refrigerator[];
+extern const u8 gText_ElectricFan[];
+extern const u8 gText_LawnMower[];
+extern const u8 gText_ChangeForm[];
+extern const u8 gText_ChangeAbility[];
 extern const u8 gText_DoWhatWithFollower[];
 
 #endif // GUARD_STRINGS_H
