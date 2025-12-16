@@ -2108,3 +2108,5 @@ const u32 gItemIcon_IronArmor[] = INCBIN_U32("graphics/items/icons/iron_armor.4b
 const u32 gItemIcon_IronHelm[] = INCBIN_U32("graphics/items/icons/iron_helm.4bpp.smol");
 const u32 gItemIcon_OldCloak[] = INCBIN_U32("graphics/items/icons/old_cloak.4bpp.smol");
 const u16 gItemIconPalette_IronItem[] = INCBIN_U16("graphics/items/icon_palettes/iron_item.gbapal");
+const u32 gItemIcon_OutfitBox[] = INCBIN_U32("graphics/items/icons/outfit_box.4bpp.lz");
+const u16 gItemIconPalette_OutfitBox[] = INCBIN_U16("graphics/items/icon_palettes/outfit_box.gbapal");

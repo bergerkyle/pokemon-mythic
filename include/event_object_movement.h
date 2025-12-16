@@ -513,5 +513,6 @@ bool8 MovementAction_EmoteDoubleExclamationMark_Step0(struct ObjectEvent *, stru
 bool8 PlayerIsUnderWaterfall(struct ObjectEvent *objectEvent);
 
 u8 GetObjectEventApricornTreeId(u8 objectEventId);
+const struct SpritePalette *GetObjectEventPaletteFromTag(u16 tag);
 
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H
