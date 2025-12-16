@@ -86,8 +86,6 @@ u32 UpdatePaletteFade(void)
 {
     u32 result;
 
-    sPlttPreviousUpdateResult = PALETTE_FADE_STATUS_LOADING;
-
     if (sPlttBufferTransferPending)
         return PALETTE_FADE_STATUS_LOADING;
 
@@ -104,11 +102,6 @@ u32 UpdatePaletteFade(void)
     sPlttPreviousUpdateResult = result;
 
     return result;
-}
-
-u32 PrevPaletteFadeResult(void)
-{
-    return sPlttPreviousUpdateResult;
 }
 
 void ResetPaletteFade(void)

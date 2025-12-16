@@ -948,9 +948,9 @@ void TestRunner_Battle_RecordHP(u32 battlerId, u32 oldHP, u32 newHP)
 
 static const char *const sBattleActionNames[] =
 {
-    [B_ACTION_USE_MOVE] = "MOVE",
-    [B_ACTION_USE_ITEM] = "USE_ITEM",
-    [B_ACTION_SWITCH] = "SWITCH",
+    [B_ACTION_USE_MOVE] = "Move",
+    [B_ACTION_USE_ITEM] = "Use Item",
+    [B_ACTION_SWITCH] = "Switch",
 };
 
 static const char *const sGimmickIdentifiers[GIMMICKS_COUNT] =

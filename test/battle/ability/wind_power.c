@@ -50,8 +50,7 @@ SINGLE_BATTLE_TEST("Wind Power sets up Charge for player when hit by a wind move
             ABILITY_POPUP(player, ABILITY_WIND_POWER);
             MESSAGE("Being hit by Air Cutter charged Wattrel with power!");
         }
-    }
-    THEN {
+    } THEN {
         if (move == MOVE_AIR_CUTTER) {
             EXPECT_MUL_EQ(dmgBefore, Q_4_12(2.0), dmgAfter);
         }
@@ -95,8 +94,7 @@ SINGLE_BATTLE_TEST("Wind Power sets up Charge for opponent when hit by a wind mo
             ABILITY_POPUP(opponent, ABILITY_WIND_POWER);
             MESSAGE("Being hit by Air Cutter charged the opposing Wattrel with power!");
         }
-    }
-    THEN {
+    } THEN {
         if (move == MOVE_AIR_CUTTER) {
             EXPECT_MUL_EQ(dmgBefore, Q_4_12(2.0), dmgAfter);
         }
@@ -176,8 +174,7 @@ DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ab
             HP_BAR(opponentLeft);
             HP_BAR(opponentRight);
         }
-    }
-    THEN {
+    } THEN {
         EXPECT_NE(playerLeft->hp, playerLeft->maxHP);
         EXPECT_NE(playerRight->hp, playerRight->maxHP);
         EXPECT_EQ(opponentRight->hp, opponentRight->maxHP);
@@ -215,8 +212,7 @@ DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ab
             ABILITY_POPUP(playerRight, ABILITY_WIND_POWER);
             MESSAGE("Being hit by Petal Blizzard charged Wattrel with power!");
         }
-    }
-    THEN {
+    } THEN {
         EXPECT_NE(playerLeft->hp, playerLeft->maxHP);
         EXPECT_NE(playerRight->hp, playerRight->maxHP);
         EXPECT_NE(opponentRight->hp, opponentRight->maxHP);

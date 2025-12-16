@@ -1491,6 +1491,7 @@ void CheckROMSize(struct ScriptContext *ctx)
     ConvertQ22_10ToDecimalString(gStringVar2, currROMFreeKB, 2, ROUND_FLOOR);
 }
 
+static const u8 sDebugText_WeatherNotDefined[] = _("Not Defined!!!");
 static void DebugAction_Util_Weather(u8 taskId)
 {
     u8 windowId;
