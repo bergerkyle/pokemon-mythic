@@ -1653,6 +1653,90 @@ void ItemUseOutOfBattle_TownMap(u8 taskId)
     }
 }
 
+static void InitBerryPouchFromBag(void)
+{
+    InitBerryPouch(BERRYPOUCH_FROMFIELD, CB2_BagMenuFromStartMenu, FALSE);
+}
+
+static void Task_OpenRegisteredBerryPouch(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        InitBerryPouch(BERRYPOUCH_FROMFIELD, CB2_ReturnToField, TRUE);
+        DestroyTask(taskId);
+    }
+}
+
+void ItemUseOutOfBattle_BerryPouch(u8 taskId)
+{
+    if (!gTasks[taskId].tUsingRegisteredKeyItem)
+    {
+        gBagMenu->newScreenCallback = InitBerryPouchFromBag;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else
+    {
+        gFieldCallback = FieldCB_ReturnToFieldNoScript;
+        FadeScreen(FADE_TO_BLACK, 0);
+        gTasks[taskId].func = Task_OpenRegisteredBerryPouch;
+    }
+}
+
+static void InitTmCaseFromBag(void)
+{
+    InitTMCase(TMCASE_FIELD, CB2_BagMenuFromStartMenu, FALSE);
+}
+
+static void Task_OpenRegisteredTmCase(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        InitTMCase(TMCASE_FIELD, CB2_ReturnToField, TRUE);
+        DestroyTask(taskId);
+    }
+}
+
+void ItemUseOutOfBattle_TMCase(u8 taskId)
+{
+    if (!gTasks[taskId].tUsingRegisteredKeyItem)
+    {
+        gBagMenu->newScreenCallback = InitTmCaseFromBag;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else
+    {
+        gFieldCallback = FieldCB_ReturnToFieldNoScript;
+        FadeScreen(FADE_TO_BLACK, 0);
+        gTasks[taskId].func = Task_OpenRegisteredTmCase;
+    }
+}
+
+void ItemUseOutOfBattle_OutfitBox(u8 taskId)
+{
+    if (MenuHelpers_IsLinkActive() == TRUE)
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+    }
+    else if (gTasks[taskId].tUsingRegisteredKeyItem != TRUE)
+    {
+        gBagMenu->newScreenCallback = CB2_OpenOutfitBoxFromBag;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else
+    {
+        gFieldCallback = FieldCB_ReturnToFieldNoScript;
+        FadeScreen(FADE_TO_BLACK, 0);
+        gTasks[taskId].func = Task_OpenRegisteredOutfitBox;
+    }
+}
+
+static void CB2_OpenOutfitBoxFromBag(void)
+{
+    OpenOutfitMenu(CB2_ReturnToBagMenuPocket);
+}
+
 static void ItemUseOnFieldCB_Cut(u8 taskId)
 {
     LockPlayerFieldControls();
@@ -1716,7 +1800,6 @@ void Task_OpenRegisteredFly(u8 taskId)
         DestroyTask(taskId);
     }
 }
-
 static void Task_OpenRegisteredOutfitBox(u8 taskId){
     if (!gPaletteFade.active)
     {
