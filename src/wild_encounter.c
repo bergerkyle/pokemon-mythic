@@ -1110,7 +1110,7 @@ struct WildPokemon GetLocalWaterMon(void)
         const struct WildPokemonInfo *waterMonsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo;
 
         if (waterMonsInfo)
-            return waterMonsInfo->wildPokemon[ChooseWildMonIndex_Water()].species;
+            return waterMonsInfo->wildPokemon[ChooseWildMonIndex_Water()];
     }
     return NULL_POKEMON;
 }
@@ -1127,7 +1127,7 @@ struct WildPokemon GetLocalRockSmashMon(void)
         const struct WildPokemonInfo *rockSmashMonsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].rockSmashMonsInfo;
 
         if (rockSmashMonsInfo)
-            return rockSmashMonsInfo->wildPokemon[ChooseWildMonIndex_Rocks()].species;
+            return rockSmashMonsInfo->wildPokemon[ChooseWildMonIndex_Rocks()];
     }
     return NULL_POKEMON;
 }
@@ -1448,7 +1448,7 @@ static bool8 GeneratedOverworldMonShinyRoll(void) // Replicated partly from Crea
     return FALSE;
 }
 
-u8 ChooseHiddenMonIndex(void)
+u32 ChooseHiddenMonIndex(void)
 {
     #ifdef ENCOUNTER_CHANCE_HIDDEN_MONS_TOTAL
         u8 rand = Random() % ENCOUNTER_CHANCE_HIDDEN_MONS_TOTAL;
