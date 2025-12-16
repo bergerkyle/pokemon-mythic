@@ -2722,7 +2722,7 @@ void CreateAbilityPopUp(u8 battler, enum Ability ability, bool32 isDoubleBattle)
 
     if (gTestRunnerEnabled)
     {
-        TestRunner_Battle_RecordAbilityPopUp(battlerId, ability);
+        TestRunner_Battle_RecordAbilityPopUp(battler, ability);
         if (gTestRunnerHeadless)
             return;
     }
@@ -2733,8 +2733,8 @@ void CreateAbilityPopUp(u8 battler, enum Ability ability, bool32 isDoubleBattle)
         LoadSpritePalette(&sSpritePalette_AbilityPopUp);
     }
 
-    gBattleStruct->battlerState[battlerId].activeAbilityPopUps = TRUE;
-    battlerPosition = GetBattlerPosition(battlerId);
+    gBattleStruct->battlerState[battler].activeAbilityPopUps = TRUE;
+    battlerPosition = GetBattlerPosition(battler);
 
     if (isDoubleBattle)
         coords = sAbilityPopUpCoordsDoubles;
@@ -2770,30 +2770,30 @@ void CreateAbilityPopUp(u8 battler, enum Ability ability, bool32 isDoubleBattle)
     gSprites[spriteId2].tOriginalX = coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_DIFF;
     gSprites[spriteId2].oam.tileNum += (8 * 4); //Second half of pop up
 
-    gBattleStruct->abilityPopUpSpriteIds[battlerId][0] = spriteId1;
-    gBattleStruct->abilityPopUpSpriteIds[battlerId][1] = spriteId2;
+    gBattleStruct->abilityPopUpSpriteIds[battler][0] = spriteId1;
+    gBattleStruct->abilityPopUpSpriteIds[battler][1] = spriteId2;
 
     taskId = CreateTask(Task_FreeAbilityPopUpGfx, 5);
     gTasks[taskId].tSpriteId1 = spriteId1;
     gTasks[taskId].tSpriteId2 = spriteId2;
 
     gSprites[spriteId1].tIsMain = TRUE;
-    gSprites[spriteId1].tBattlerId = battlerId;
-    gSprites[spriteId2].tBattlerId = battlerId;
+    gSprites[spriteId1].tBattlerId = battler;
+    gSprites[spriteId2].tBattlerId = battler;
 
     StartSpriteAnim(&gSprites[spriteId1], 0);
     StartSpriteAnim(&gSprites[spriteId2], 0);
 
-    PrintBattlerOnAbilityPopUp(battlerId, spriteId1, spriteId2);
+    PrintBattlerOnAbilityPopUp(battler, spriteId1, spriteId2);
     PrintAbilityOnAbilityPopUp(ability, spriteId1, spriteId2);
     RestoreOverwrittenPixels((void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32));
 }
 
 void UpdateAbilityPopup(u8 battlerId)
 {
-    u8 *spriteIds = gBattleStruct->abilityPopUpSpriteIds[battler];
+    u8 *spriteIds = gBattleStruct->abilityPopUpSpriteIds[battlerId];
     enum Ability ability = (gBattleScripting.abilityPopupOverwrite) ? gBattleScripting.abilityPopupOverwrite
-                                                           : gBattleMons[battler].ability;
+                                                           : gBattleMons[battlerId].ability;
     PrintAbilityOnAbilityPopUp(ability, spriteIds[0], spriteIds[1]);
 }
 
@@ -3025,9 +3025,9 @@ void TryAddLastUsedBallItemSprites(void)
 
 static void DestroyLastUsedBallWinGfx(struct Sprite *sprite)
 {
-    FreeSpriteTilesByTag(TAG_LAST_BALL_WINDOW);
+    FreeSpriteTilesByTag(LAST_BALL_WINDOW_TAG);
     if (GetSpriteTileStartByTag(MOVE_INFO_WINDOW_TAG) == 0xFFFF)
-        FreeSpritePaletteByTag(TAG_ABILITY_POP_UP);
+        FreeSpritePaletteByTag(ABILITY_POP_UP_TAG);
     DestroySprite(sprite);
     gBattleStruct->ballSpriteIds[1] = MAX_SPRITES;
 }
@@ -3063,8 +3063,8 @@ void TryToHideMoveInfoWindow(void)
 static void DestroyMoveInfoWinGfx(struct Sprite *sprite)
 {
     FreeSpriteTilesByTag(MOVE_INFO_WINDOW_TAG);
-    if (GetSpriteTileStartByTag(TAG_LAST_BALL_WINDOW) == 0xFFFF)
-        FreeSpritePaletteByTag(TAG_ABILITY_POP_UP);
+    if (GetSpriteTileStartByTag(LAST_BALL_WINDOW_TAG) == 0xFFFF)
+        FreeSpritePaletteByTag(ABILITY_POP_UP_TAG);
     DestroySprite(sprite);
     gBattleStruct->moveInfoSpriteId = MAX_SPRITES;
 }
