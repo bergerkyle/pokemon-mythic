@@ -1707,8 +1707,6 @@ void CalculateMonStats(struct Pokemon *mon)
     s32 equipAttack = 0;
     s32 equipDefense = 0;
     s32 equipSpeed = 0;
-    s32 equipSpAttack = 0;
-    s32 equipSpDefense = 0;
     if(!IsTradedMon(mon)){
         const u8 weaponStat = GetItemStat(gSaveBlock1Ptr->equippedWeapon);
         const u8 helmStat = GetItemStat(gSaveBlock1Ptr->equippedHelm);

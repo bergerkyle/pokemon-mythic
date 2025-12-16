@@ -15323,9 +15323,11 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .iconPic = gItemIcon_OldCloak,
         .iconPalette = gItemIconPalette_IronItem,
+    },
+
     [ITEM_OUTFIT_BOX] =
     {
-        .name = _("Outfit Box"),
+        .name = ITEM_NAME("Outfit Box"),
         .price = 0,
         .importance = 1,
         .description = COMPOUND_STRING(

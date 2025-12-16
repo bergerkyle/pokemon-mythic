@@ -261,9 +261,6 @@ void Task_UseORASDowsingMachine(u8 taskId)
     }
     else
     {
-        if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE))
-            GetOnOffBike(0);
-
         StartORASDowseFieldEffect();
     }
     ScriptUnfreezeObjectEvents();

@@ -175,7 +175,7 @@ static bool32 Fishing_GetRodOut(struct Task *task)
     playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     ObjectEventClearHeldMovementIfActive(playerObjEvent);
     playerObjEvent->enableAnim = TRUE;
-    SetPlayerAvatarFishing(playerObjEvent->facingDirection);
+    //(playerObjEvent->facingDirection);
     task->tStep = FISHING_WAIT_BEFORE_DOTS;
     return FALSE;
 }
