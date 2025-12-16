@@ -50,6 +50,9 @@
 #include "constants/item_effects.h"
 #include "constants/items.h"
 #include "constants/songs.h"
+#include "region_map.h"
+#include "field_move.h"
+#include "field_control_avatar.h"
 
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
@@ -85,6 +88,14 @@ static void ItemUseOnFieldCB_Honey(u8 taskId);
 static bool32 IsValidLocationForVsSeeker(void);
 static void CB2_OpenOutfitBoxFromBag(void);
 static void Task_OpenRegisteredOutfitBox(u8 taskId);
+static void ItemUseOnFieldCB_Cut(u8 taskId);
+static void ItemUseOnFieldCB_Surf(u8 taskId);
+static void ItemUseOnFieldCB_Strength(u8 taskId);
+static void ItemUseOnFieldCB_Flash(u8 taskId);
+static void ItemUseOnFieldCB_RockSmash(u8 taskId);
+static void ItemUseOnFieldCB_Waterfall(u8 taskId);
+static void ItemUseOnFieldCB_Dive(u8 taskId);
+static void ItemUseOnFieldCB_DiveUnderwater(u8 taskId);
 
 static const u8 sText_CantDismountBike[] = _("You can't dismount your Bike here.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe Itemfinder's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
@@ -1642,97 +1653,216 @@ void ItemUseOutOfBattle_TownMap(u8 taskId)
     }
 }
 
-static void InitBerryPouchFromBag(void)
+static void ItemUseOnFieldCB_Cut(u8 taskId)
 {
-    InitBerryPouch(BERRYPOUCH_FROMFIELD, CB2_BagMenuFromStartMenu, FALSE);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(FieldMove_EventScript_Cut);
+    DestroyTask(taskId);
 }
 
-static void Task_OpenRegisteredBerryPouch(u8 taskId)
+void ItemUseOutOfBattle_Cut(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_CUTTABLE_TREE))
     {
-        CleanupOverworldWindowsAndTilemaps();
-        InitBerryPouch(BERRYPOUCH_FROMFIELD, CB2_ReturnToField, TRUE);
-        DestroyTask(taskId);
-    }
-}
-
-void ItemUseOutOfBattle_BerryPouch(u8 taskId)
-{
-    if (!gTasks[taskId].tUsingRegisteredKeyItem)
-    {
-        gBagMenu->newScreenCallback = InitBerryPouchFromBag;
-        Task_FadeAndCloseBagMenu(taskId);
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Cut;
+        SetUpItemUseOnFieldCallback(taskId);
     }
     else
-    {
-        gFieldCallback = FieldCB_ReturnToFieldNoScript;
-        FadeScreen(FADE_TO_BLACK, 0);
-        gTasks[taskId].func = Task_OpenRegisteredBerryPouch;
-    }
-}
-
-static void InitTmCaseFromBag(void)
-{
-    InitTMCase(TMCASE_FIELD, CB2_BagMenuFromStartMenu, FALSE);
-}
-
-static void Task_OpenRegisteredTmCase(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        CleanupOverworldWindowsAndTilemaps();
-        InitTMCase(TMCASE_FIELD, CB2_ReturnToField, TRUE);
-        DestroyTask(taskId);
-    }
-}
-
-void ItemUseOutOfBattle_TMCase(u8 taskId)
-{
-    if (!gTasks[taskId].tUsingRegisteredKeyItem)
-    {
-        gBagMenu->newScreenCallback = InitTmCaseFromBag;
-        Task_FadeAndCloseBagMenu(taskId);
-    }
-    else
-    {
-        gFieldCallback = FieldCB_ReturnToFieldNoScript;
-        FadeScreen(FADE_TO_BLACK, 0);
-        gTasks[taskId].func = Task_OpenRegisteredTmCase;
-    }
-}
-
-void ItemUseOutOfBattle_OutfitBox(u8 taskId)
-{
-    if (MenuHelpers_IsLinkActive() == TRUE)
-    {
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
-    }
-    else if (gTasks[taskId].tUsingRegisteredKeyItem != TRUE)
+}
+
+void ItemUseOutOfBattle_Fly(u8 taskId)
+{
+    // First, perform all the checks to see if Fly can be used at all.
+    if (IsFieldMoveUnlocked(FIELD_MOVE_FLY) == TRUE
+     && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE
+     && !MenuHelpers_IsLinkActive())
     {
-        gBagMenu->newScreenCallback = CB2_OpenOutfitBoxFromBag;
-        Task_FadeAndCloseBagMenu(taskId);
+        // If the checks pass, now we figure out HOW the item was used.
+        // gTasks[taskId].data[3] is TRUE if it was a registered item.
+        if (gTasks[taskId].data[3] != TRUE)
+        {
+            // Case 1: Used from the Bag Menu.
+            // Set the callback directly to the fly map initializer and close the bag.
+            gBagMenu->newScreenCallback = CB2_OpenFlyMap;
+            Task_FadeAndCloseBagMenu(taskId);
+        }
+        else
+        {
+            // Case 2: Used as a Registered Item on the field.
+            // Fade the screen and set up a task to open the map.
+            FadeScreen(FADE_TO_BLACK, 0);
+            gTasks[taskId].func = Task_OpenRegisteredFly;
+        }
     }
     else
     {
-        gFieldCallback = FieldCB_ReturnToFieldNoScript;
-        FadeScreen(FADE_TO_BLACK, 0);
-        gTasks[taskId].func = Task_OpenRegisteredOutfitBox;
+        // If any of the checks fail, show the "can't use" message.
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
     }
 }
 
-static void CB2_OpenOutfitBoxFromBag(void)
+void CB2_OpenFlyItemFromBag(void)
 {
-    OpenOutfitMenu(CB2_ReturnToBagMenuPocket);
+    CB2_OpenFlyMap();
 }
 
-static void Task_OpenRegisteredOutfitBox(u8 taskId)
+void Task_OpenRegisteredFly(u8 taskId)
 {
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        SetMainCallback2(CB2_OpenFlyMap);
+        DestroyTask(taskId);
+    }
+}
+
+static void Task_OpenRegisteredOutfitBox(u8 taskId){
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
         OpenOutfitMenu(CB2_ReturnToField);
         DestroyTask(taskId);
+    }
+}
+
+static void ItemUseOnFieldCB_Surf(u8 taskId)
+{
+    // Run the surf script and destroy this task.
+    ScriptContext_SetupScript(EventScript_UseSurf);
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_Surf(u8 taskId)
+{
+    // Check if the player is facing water.
+    if (IsPlayerFacingSurfableFishableWater() == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Surf;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        // Not facing water, so show the "can't use" message.
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
+    }
+}
+
+// Add the function definition
+void ItemUseOutOfBattle_Strength(u8 taskId)
+{
+    if (IsFieldMoveUnlocked(FIELD_MOVE_STRENGTH) == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Strength;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
+    }
+}
+
+static void ItemUseOnFieldCB_Strength(u8 taskId)
+{
+    ScriptContext_SetupScript(EventScript_UseStrength);
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_Flash(u8 taskId)
+{
+    // We only check for the badge here. The script will handle
+    // checking if the cave is actually dark.
+    if (IsFieldMoveUnlocked(FIELD_MOVE_FLASH) == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Flash;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
+    }
+}
+
+static void ItemUseOnFieldCB_Flash(u8 taskId)
+{
+    ScriptContext_SetupScript(EventScript_UseFlash);
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_RockSmash(u8 taskId)
+{
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_BREAKABLE_ROCK) == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_RockSmash;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
+    }
+}
+
+static void ItemUseOnFieldCB_RockSmash(u8 taskId)
+{
+    ScriptContext_SetupScript(EventScript_UseRockSmash);
+    DestroyTask(taskId);
+}
+
+static bool8 IsPlayerFacingWaterfall(void)
+{
+    s16 x, y;
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    return MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y));
+}
+
+void ItemUseOutOfBattle_Waterfall(u8 taskId)
+{
+    if (IsPlayerFacingWaterfall() == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Waterfall;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
+    }
+}
+
+static void ItemUseOnFieldCB_Waterfall(u8 taskId)
+{
+    ScriptContext_SetupScript(EventScript_UseWaterfall);
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_Dive(u8 taskId)
+{
+    ScriptContext_SetupScript(EventScript_UseDive);
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_DiveUnderwater(u8 taskId)
+{
+    ScriptContext_SetupScript(EventScript_UseDiveUnderwater);
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_Dive(u8 taskId)
+{
+    u8 diveWarpStatus = TrySetDiveWarp();
+
+    if (diveWarpStatus == 2) // On a dive spot
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Dive;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else if (diveWarpStatus == 1) // On a surfacing spot
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_DiveUnderwater;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else // Not a valid spot
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
     }
 }
 
