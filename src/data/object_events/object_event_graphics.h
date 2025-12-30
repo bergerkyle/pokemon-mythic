@@ -59,6 +59,7 @@ const u32 gObjectEventPic_MayFieldMove[] = INCBIN_U32("graphics/object_events/pi
 const u32 gObjectEventPic_MayFishing[] = INCBIN_U32("graphics/object_events/pics/people/may/fishing.4bpp");
 const u32 gObjectEventPic_MayWatering[] = INCBIN_U32("graphics/object_events/pics/people/may/watering.4bpp");
 const u16 gObjectEventPal_Chest[] = INCBIN_U16("graphics/object_events/palettes/chest.gbapal");
+const u16 gObjectEventPal_Isaac[] = INCBIN_U16("graphics/object_events/palettes/isaac.gbapal");
 const u16 gObjectEventPal_Npc1[] = INCBIN_U16("graphics/object_events/palettes/npc_1.gbapal");
 const u16 gObjectEventPal_Npc2[] = INCBIN_U16("graphics/object_events/palettes/npc_2.gbapal");
 const u16 gObjectEventPal_Npc3[] = INCBIN_U16("graphics/object_events/palettes/npc_3.gbapal");
@@ -362,6 +363,7 @@ const u32 gObjectEventPic_Noland[] = INCBIN_U32("graphics/object_events/pics/peo
 const u32 gObjectEventPic_Lucy[] = INCBIN_U32("graphics/object_events/pics/people/frontier_brains/lucy.4bpp");
 const u32 gObjectEventPic_Brandon[] = INCBIN_U32("graphics/object_events/pics/people/frontier_brains/brandon.4bpp");
 const u32 gObjectEventPic_PokeBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_poke.4bpp");
+const u32 gObjectEventPic_Isaac[] = INCBIN_U32("graphics/object_events/pics/people/isaac.4bpp");
 const u32 gObjectEventPic_Chest[] = INCBIN_U32("graphics/object_events/pics/misc/chest.4bpp");
 const u32 gObjectEventPic_ChestRare[] = INCBIN_U32("graphics/object_events/pics/misc/chest_rare.4bpp");
 
