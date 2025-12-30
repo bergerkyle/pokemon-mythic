@@ -1120,6 +1120,12 @@ static const struct SpriteFrameImage sPicTable_PokeBall[] = {
     overworld_frame(gObjectEventPic_PokeBall, 2, 4, 4),
     overworld_frame(gObjectEventPic_PokeBall, 2, 4, 0),
 };
+
+static const struct SpriteFrameImage sPicTable_Torch[] = {
+    overworld_frame(gObjectEventPic_Torch, 2, 4, 0),
+    overworld_frame(gObjectEventPic_Torch, 2, 4, 1),
+    overworld_frame(gObjectEventPic_Torch, 2, 4, 2),
+};
 static const struct SpriteFrameImage sPicTable_Chest[] = {
     overworld_frame(gObjectEventPic_Chest, 2, 4, 0),
     overworld_frame(gObjectEventPic_Chest, 2, 4, 1),
