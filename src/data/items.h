@@ -8227,13 +8227,14 @@ const struct Item gItemsInfo[] =
     {
         .name = ITEM_NAME("Blue Scarf"),
         .pluralName = ITEM_PLURAL_NAME("Blue Scarves"),
+        .holdEffect = HOLD_EFFECT_BLUE_SCARF,
         .price = 100,
         .description = COMPOUND_STRING(
             "A hold item that\n"
-            "raises Beauty in\n"
-            "Contests."),
+            "raises Defense in\n"
+            "battle."),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_CONTEST_HELD_ITEM,
+        .sortType = ITEM_TYPE_SPECIAL_HELD_ITEM,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -15250,6 +15251,22 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_IronSword,
         .iconPalette = gItemIconPalette_IronItem,
     },
+    [ITEM_CADET_SWORD] =
+    {
+        .name = ITEM_NAME("Cadet Sword"),
+        .price = 800,
+        .description = COMPOUND_STRING(
+            "A sword for\n"
+            "new cadets. \n"
+            "+6 ATK / SP ATK."),
+        .pocket = POCKET_WEAPONS,
+        .type = ITEM_USE_BAG_MENU,
+        .sortType = ITEM_TYPE_SELLABLE,
+        .statValue = 6,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_CadetSword,
+        .iconPalette = gItemIconPalette_Cadet,
+    },
 
     [ITEM_MASTER_BLADE] =
     {
@@ -15324,6 +15341,25 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_OldCloak,
         .iconPalette = gItemIconPalette_IronItem,
     },
+
+    [ITEM_CADET_CLOAK] =
+    {
+        .name = ITEM_NAME("Cadet Cloak"),
+        .price = 400,
+        .description = COMPOUND_STRING(
+            "A cadet's basic \n"
+            "traveling cloak.\n"
+            "+6 SPD"),
+        .pocket = POCKET_CLOAKS,
+        .type = ITEM_USE_BAG_MENU,
+        .sortType = ITEM_TYPE_SELLABLE,
+        .statValue = 6,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_CadetCloak,
+        .iconPalette = gItemIconPalette_Cadet,
+    },
+
+// END EQUIPMENT
 
     [ITEM_OUTFIT_BOX] =
     {

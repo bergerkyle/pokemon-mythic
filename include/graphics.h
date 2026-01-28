@@ -1753,6 +1753,9 @@ extern const u32 gItemIcon_IronArmor[];
 extern const u32 gItemIcon_IronHelm[];
 extern const u32 gItemIcon_OldCloak[];
 extern const u16 gItemIconPalette_IronItem[];
+extern const u32 gItemIcon_CadetCloak[];
+extern const u32 gItemIcon_CadetSword[];
+extern const u16 gItemIconPalette_Cadet[];
 
 //menu graphics
 extern const u16 gMenuInfoElements1_Pal[16];

@@ -4414,8 +4414,8 @@
     {
       "id": "LAYOUT_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB_2",
       "name": "LittlerootTown_ProfessorBirchsLab_2_Layout",
-      "width": 40,
-      "height": 40,
+      "width": 16,
+      "height": 16,
       "primary_tileset": "gTileset_CastleInterior",
       "secondary_tileset": "gTileset_village",
       "border_filepath": "data/layouts/LittlerootTown_ProfessorBirchsLab_2/border.bin",
