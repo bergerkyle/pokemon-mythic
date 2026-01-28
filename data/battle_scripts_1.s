@@ -5055,6 +5055,18 @@ BattleScript_WeaknessPolicyRemoveItem:
 BattleScript_WeaknessPolicyEnd:
 	return
 
+BattleScript_TargetHeldItemStatRaise::
+	copybyte sBATTLER, gBattlerTarget
+	statbuffchange BS_TARGET, STAT_CHANGE_ONLY_CHECKING, BattleScript_TargetHeldItemStatRaiseItemRet
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_CHANGE, BattleScript_TargetHeldItemStatRaiseItemRet
+	playanimation BS_TARGET, B_ANIM_HELD_ITEM_EFFECT
+	waitanimation
+	statbuffchange BS_TARGET, 0, BattleScript_TargetHeldItemStatRaiseItemRet
+	printstring STRINGID_USINGITEMSTATOFPKMNROSE
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_TargetHeldItemStatRaiseItemRet:
+	end3
+
 BattleScript_TargetItemStatRaise::
 	copybyte sBATTLER, gBattlerTarget
 	statbuffchange BS_TARGET, STAT_CHANGE_ONLY_CHECKING, BattleScript_TargetItemStatRaiseRemoveItemRet

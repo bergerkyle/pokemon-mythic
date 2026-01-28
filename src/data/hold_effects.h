@@ -646,4 +646,29 @@ const struct HoldEffectInfo gHoldEffectsInfo[HOLD_EFFECT_COUNT] =
         .onSwitchIn = TRUE,
         .onSwitchInFirstTurn = TRUE,
     },
+    [HOLD_EFFECT_RED_SCARF] =
+    {
+        .onSwitchIn = TRUE,
+        .onSwitchInFirstTurn = TRUE,
+    },
+    [HOLD_EFFECT_BLUE_SCARF] =
+    {
+        .onSwitchIn = TRUE,
+        .onSwitchInFirstTurn = TRUE,
+    },
+    [HOLD_EFFECT_PINK_SCARF] =
+    {
+        .onSwitchIn = TRUE,
+        .onSwitchInFirstTurn = TRUE,
+    },
+    [HOLD_EFFECT_GREEN_SCARF] =
+    {
+        .onSwitchIn = TRUE,
+        .onSwitchInFirstTurn = TRUE,
+    },
+    [HOLD_EFFECT_YELLOW_SCARF] =
+    {
+        .onSwitchIn = TRUE,
+        .onSwitchInFirstTurn = TRUE,
+    },
 };

@@ -1065,6 +1065,20 @@ static enum ItemEffect TrySetMicleBerry(u32 battler, u32 itemId, ActivationTimin
     return effect;
 }
 
+
+static enum ItemEffect TrySetScarf(u32 battler, u32 itemId, ActivationTiming timing, u32 statId)
+{
+    enum ItemEffect effect = ITEM_NO_EFFECT;
+        if (timing == IsOnSwitchInFirstTurnActivation)
+        {
+            SET_STATCHANGER(statId, 1, FALSE);
+            BattleScriptPushCursorAndCallback(BattleScript_TargetHeldItemStatRaise);
+            effect = ITEM_STATS_CHANGE;
+        }
+    //ITEM_STATS_CHANGE
+    return effect;
+}
+
 enum ItemEffect ItemBattleEffects(u32 itemBattler, u32 battler, enum HoldEffect holdEffect, ActivationTiming timing)
 {
     enum ItemEffect effect = ITEM_NO_EFFECT;
@@ -1252,6 +1266,21 @@ enum ItemEffect ItemBattleEffects(u32 itemBattler, u32 battler, enum HoldEffect 
         break;
     case HOLD_EFFECT_MICLE_BERRY:
         effect = TrySetMicleBerry(itemBattler, item, timing);
+        break;
+    case HOLD_EFFECT_RED_SCARF:
+        effect = TrySetScarf(itemBattler, item, timing, STAT_ATK);
+        break;
+    case HOLD_EFFECT_BLUE_SCARF:
+        effect = TrySetScarf(itemBattler, item, timing, STAT_DEF);
+        break;
+    case HOLD_EFFECT_PINK_SCARF:
+        effect = TrySetScarf(itemBattler, item, timing, STAT_SPATK);
+        break;
+    case HOLD_EFFECT_GREEN_SCARF:
+        effect = TrySetScarf(itemBattler, item, timing, STAT_SPDEF);
+        break;
+    case HOLD_EFFECT_YELLOW_SCARF:
+        effect = TrySetScarf(itemBattler, item, timing, STAT_SPEED);
         break;
     default:
         break;

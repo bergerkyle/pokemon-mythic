@@ -3957,28 +3957,13 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
     {
     case ABILITYEFFECT_ON_SWITCHIN:
         gBattleScripting.battler = battler;
-        u32 chosenTarget;
-        u32 target1;
-        u32 target2;
-        if (GetBattlerHoldEffectIgnoreNegation(battler) == HOLD_EFFECT_BLUE_SCARF) {
-            if (!gSpecialStatuses[battler].switchInAbilityDone
-             && !GetBattlerPartyState(battler)->dauntlessShieldBoost)
-            {
-                if (GetConfig(CONFIG_DAUNTLESS_SHIELD) == GEN_9)
-                    GetBattlerPartyState(battler)->dauntlessShieldBoost = TRUE;
-                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                if (CompareStat(battler, STAT_DEF, MAX_STAT_STAGE, CMP_LESS_THAN, gLastUsedAbility))
-                {
-                    SET_STATCHANGER(STAT_DEF, 1, FALSE);
-                    BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
-                    effect++;
-                }
-            }
-        }
         switch (gLastUsedAbility)
         {
         case ABILITY_TRACE:
             {
+                u32 chosenTarget;
+                u32 target1;
+                u32 target2;
                 if (gSpecialStatuses[battler].switchInAbilityDone)
                     break;
                 if (GetBattlerHoldEffectIgnoreAbility(battler) == HOLD_EFFECT_ABILITY_SHIELD)

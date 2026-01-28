@@ -8209,13 +8209,14 @@ const struct Item gItemsInfo[] =
     {
         .name = ITEM_NAME("Red Scarf"),
         .pluralName = ITEM_PLURAL_NAME("Red Scarves"),
+        .holdEffect = HOLD_EFFECT_RED_SCARF,
         .price = 100,
         .description = COMPOUND_STRING(
             "A hold item that\n"
-            "raises Cool in\n"
-            "Contests."),
+            "raises Attack in\n"
+            "battle."),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_CONTEST_HELD_ITEM,
+        .sortType = ITEM_TYPE_SPECIAL_HELD_ITEM,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8246,13 +8247,14 @@ const struct Item gItemsInfo[] =
     {
         .name = ITEM_NAME("Pink Scarf"),
         .pluralName = ITEM_PLURAL_NAME("Pink Scarves"),
+        .holdEffect = HOLD_EFFECT_PINK_SCARF,
         .price = 100,
         .description = COMPOUND_STRING(
             "A hold item that\n"
-            "raises Cute in\n"
-            "Contests."),
+            "raises Sp Attack in\n"
+            "battle."),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_CONTEST_HELD_ITEM,
+        .sortType = ITEM_TYPE_SPECIAL_HELD_ITEM,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8264,13 +8266,14 @@ const struct Item gItemsInfo[] =
     {
         .name = ITEM_NAME("Green Scarf"),
         .pluralName = ITEM_PLURAL_NAME("Green Scarves"),
+        .holdEffect = HOLD_EFFECT_GREEN_SCARF,
         .price = 100,
         .description = COMPOUND_STRING(
             "A hold item that\n"
-            "raises Smart in\n"
-            "Contests."),
+            "raises Sp Defense in\n"
+            "battle."),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_CONTEST_HELD_ITEM,
+        .sortType = ITEM_TYPE_SPECIAL_HELD_ITEM,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8282,13 +8285,14 @@ const struct Item gItemsInfo[] =
     {
         .name = ITEM_NAME("Yellow Scarf"),
         .pluralName = ITEM_PLURAL_NAME("Yellow Scarves"),
+        .holdEffect = HOLD_EFFECT_YELLOW_SCARF,
         .price = 100,
         .description = COMPOUND_STRING(
             "A hold item that\n"
-            "raises Tough in\n"
-            "Contests."),
+            "raises Speed in\n"
+            "battle."),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_CONTEST_HELD_ITEM,
+        .sortType = ITEM_TYPE_SPECIAL_HELD_ITEM,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
