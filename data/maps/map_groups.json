@@ -2,6 +2,7 @@
   "group_order": [
     "gMapGroup_TownsAndRoutes",
     "gMapGroup_IndoorLittleroot",
+    "gMapGroup_IndoorCherrygrove",
     "gMapGroup_IndoorOldale",
     "gMapGroup_IndoorDewford",
     "gMapGroup_IndoorLavaridge",
@@ -46,6 +47,7 @@
     "SootopolisCity",
     "EverGrandeCity",
     "LittlerootTown",
+    "CherrygroveCity",
     "OldaleTown",
     "DewfordTown",
     "LavaridgeTown",
@@ -101,6 +103,12 @@
     "LittlerootTown_MaysHouse_2F",
     "LittlerootTown_ProfessorBirchsLab",
     "LittlerootTown_ProfessorBirchsLab_2"
+  ],
+  "gMapGroup_IndoorCherrygrove": [
+    "CherrygroveCity_BrendansHouse_1F",
+    "CherrygroveCity_BrendansHouse_2F",
+    "CherrygroveCity_MaysHouse_1F",
+    "CherrygroveCity_ProfessorBirchsLab"
   ],
   "gMapGroup_IndoorOldale": [
     "OldaleTown_House1",

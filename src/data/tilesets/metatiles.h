@@ -227,3 +227,9 @@ const u16 gMetatileAttributes_village[] = INCBIN_U16("data/tilesets/secondary/vi
 
 const u16 gMetatiles_village_interior[] = INCBIN_U16("data/tilesets/primary/village_interior/metatiles.bin");
 const u16 gMetatileAttributes_village_interior[] = INCBIN_U16("data/tilesets/primary/village_interior/metatile_attributes.bin");
+
+const u16 gMetatiles_general2[] = INCBIN_U16("data/tilesets/primary/general_2/metatiles.bin");
+const u16 gMetatileAttributes_general2[] = INCBIN_U16("data/tilesets/primary/general_2/metatile_attributes.bin");
+
+const u16 gMetatiles_cherrygrove[] = INCBIN_U16("data/tilesets/secondary/cherrygrove/metatiles.bin");
+const u16 gMetatileAttributes_cherrygrove[] = INCBIN_U16("data/tilesets/secondary/cherrygrove/metatile_attributes.bin");
