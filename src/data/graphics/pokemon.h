@@ -5608,7 +5608,9 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 
 #if P_GENDER_DIFFERENCES
     const u32 gMonFrontPic_EeveeF[] = INCBIN_U32("graphics/pokemon/eevee/anim_frontf.4bpp.smol");
+    const u32 gMonFrontPic_EeveePartnerF[] = INCBIN_U32("graphics/pokemon/eevee/partner/anim_frontf.4bpp.smol");
     const u32 gMonBackPic_EeveeF[] = INCBIN_U32("graphics/pokemon/eevee/backf.4bpp.smol");
+    const u32 gMonBackPic_EeveePartnerF[] = INCBIN_U32("graphics/pokemon/eevee/partner/back.4bpp.smol");
 #if OW_POKEMON_OBJECT_EVENTS
     const u32 gObjectEventPic_EeveeF[] = INCBIN_COMP("graphics/pokemon/eevee/overworldf.4bpp");
 #endif //OW_POKEMON_OBJECT_EVENTS

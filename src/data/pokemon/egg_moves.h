@@ -1360,6 +1360,22 @@ static const u16 sEeveeEggMoveLearnset[] = {
     MOVE_CAPTIVATE,
     MOVE_UNAVAILABLE,
 };
+
+static const u16 sEeveePartnerEggMoveLearnset[] = {
+    MOVE_EMBER,
+    MOVE_WATER_GUN,
+    MOVE_THUNDERSHOCK,
+    MOVE_SWIFT,
+    MOVE_WISH,
+    MOVE_YAWN,
+    MOVE_DETECT,
+    MOVE_CONFUSION,
+    MOVE_LEAFAGE,
+    MOVE_POWDER_SNOW,
+    MOVE_FAIRY_WIND,
+    MOVE_SNARL,
+    MOVE_UNAVAILABLE,
+};
 #endif //P_FAMILY_EEVEE
 
 #if P_FAMILY_OMANYTE

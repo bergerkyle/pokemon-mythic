@@ -7354,6 +7354,30 @@ static const u16 sEeveeTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+static const u16 sEeveePartnerTeachableLearnset[] = {
+    MOVE_BLIZZARD,
+    MOVE_CALM_MIND,
+    MOVE_DREAM_EATER,
+    MOVE_FIRE_BLAST,
+    MOVE_FLAMETHROWER,
+    MOVE_FLASH,
+    MOVE_HAIL,
+    MOVE_HYPER_BEAM,
+    MOVE_ICE_BEAM,
+    MOVE_ICY_WIND,
+    MOVE_PSYCHIC,
+    MOVE_REST,
+    MOVE_SHADOW_BALL,
+    MOVE_SHOCK_WAVE,
+    MOVE_SOLAR_BEAM,
+    MOVE_SWIFT,
+    MOVE_THUNDER,
+    MOVE_THUNDERBOLT,
+    MOVE_THUNDER_WAVE,
+    MOVE_WATER_PULSE,
+    MOVE_UNAVAILABLE,
+};
+
 static const u16 sVaporeonTeachableLearnset[] = {
     MOVE_ATTRACT,
     MOVE_BLIZZARD,
