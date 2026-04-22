@@ -782,12 +782,20 @@
 #define METATILE_Underwater_FloorShadow  0x228
 #define METATILE_Underwater_RockWall     0x21E
 
+// gTileset_cherrygrove
+#define METATILE_cherrygrove_Door_Cherrygrove    0x239
+#define METATILE_cherrygrove_Door_Cherrygrove_2  0x23F
+
 // gTileset_forest
 #define METATILE_forest_Grass_TreeLeft       0x002
 #define METATILE_forest_Grass_TreeRight      0x003
 #define METATILE_forest_ReflectiveWater      0x0BC
 #define METATILE_forest_TallGrass_TreeLeft   0x008
 #define METATILE_forest_TallGrass_TreeRight  0x009
+
+// gTileset_general2
+#define METATILE_general2_Door_PokeCenter  0x0AA
+#define METATILE_general2_Door_PokeMart    0x0D2
 
 // gTileset_village
 #define METATILE_village_CastleDoor       0x27B
