@@ -1361,7 +1361,7 @@ static const u16 sEeveeEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-static const u16 sEeveePartnerEggMoveLearnset[] = {
+static const u16 sEeveeStarterEggMoveLearnset[] = {
     MOVE_EMBER,
     MOVE_WATER_GUN,
     MOVE_THUNDERSHOCK,

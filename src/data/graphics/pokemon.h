@@ -5581,9 +5581,13 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #if P_FAMILY_EEVEE
 #if !P_GBA_STYLE_SPECIES_GFX
     const u32 gMonFrontPic_Eevee[] = INCBIN_U32("graphics/pokemon/eevee/anim_front.4bpp.smol");
+    const u32 gMonFrontPic_EeveePartner[] = INCBIN_U32("graphics/pokemon/eevee/partner/anim_front.4bpp.smol");
     const u16 gMonPalette_Eevee[] = INCBIN_U16("graphics/pokemon/eevee/normal.gbapal");
+    const u16 gMonPalette_EeveePartner[] = INCBIN_U16("graphics/pokemon/eevee/partner/normal.gbapal");
     const u32 gMonBackPic_Eevee[] = INCBIN_U32("graphics/pokemon/eevee/back.4bpp.smol");
+    const u32 gMonBackPic_EeveePartner[] = INCBIN_U32("graphics/pokemon/eevee/partner/back.4bpp.smol");
     const u16 gMonShinyPalette_Eevee[] = INCBIN_U16("graphics/pokemon/eevee/shiny.gbapal");
+    const u16 gMonShinyPalette_EeveePartner[] = INCBIN_U16("graphics/pokemon/eevee/partner/shiny.gbapal");
 #else
     const u32 gMonFrontPic_Eevee[] = INCBIN_U32("graphics/pokemon/eevee/anim_front_gba.4bpp.smol");
     const u16 gMonPalette_Eevee[] = INCBIN_U16("graphics/pokemon/eevee/normal_gba.gbapal");
@@ -5600,15 +5604,18 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //P_FOOTPRINTS
 #if OW_POKEMON_OBJECT_EVENTS
     const u32 gObjectEventPic_Eevee[] = INCBIN_COMP("graphics/pokemon/eevee/overworld.4bpp");
+    const u32 gObjectEventPic_EeveePartner[] = INCBIN_COMP("graphics/pokemon/eevee/partner/overworld.4bpp");
 #if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
     const u16 gOverworldPalette_Eevee[] = INCBIN_U16("graphics/pokemon/eevee/overworld_normal.gbapal");
     const u16 gShinyOverworldPalette_Eevee[] = INCBIN_U16("graphics/pokemon/eevee/overworld_shiny.gbapal");
+    const u16 gOverworldPalette_EeveePartner[] = INCBIN_U16("graphics/pokemon/eevee/partner/overworld_normal.gbapal");
+    const u16 gShinyOverworldPalette_EeveePartner[] = INCBIN_U16("graphics/pokemon/eevee/partner/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
 
 #if P_GENDER_DIFFERENCES
     const u32 gMonFrontPic_EeveeF[] = INCBIN_U32("graphics/pokemon/eevee/anim_frontf.4bpp.smol");
-    const u32 gMonFrontPic_EeveePartnerF[] = INCBIN_U32("graphics/pokemon/eevee/partner/anim_frontf.4bpp.smol");
+    const u32 gMonFrontPic_EeveePartnerF[] = INCBIN_U32("graphics/pokemon/eevee/partner/anim_front.4bpp.smol");
     const u32 gMonBackPic_EeveeF[] = INCBIN_U32("graphics/pokemon/eevee/backf.4bpp.smol");
     const u32 gMonBackPic_EeveePartnerF[] = INCBIN_U32("graphics/pokemon/eevee/partner/back.4bpp.smol");
 #if OW_POKEMON_OBJECT_EVENTS

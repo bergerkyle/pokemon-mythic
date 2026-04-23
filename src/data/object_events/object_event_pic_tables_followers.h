@@ -1215,6 +1215,9 @@ static const struct SpriteFrameImage sPicTable_Ditto[] = {
 static const struct SpriteFrameImage sPicTable_Eevee[] = {
     overworld_ascending_frames(gObjectEventPic_Eevee, 4, 4),
 };
+static const struct SpriteFrameImage sPicTable_EeveePartner[] = {
+    overworld_ascending_frames(gObjectEventPic_EeveePartner, 4, 4),
+};
 #if P_GENDER_DIFFERENCES
 static const struct SpriteFrameImage sPicTable_EeveeF[] = {
     overworld_ascending_frames(gObjectEventPic_EeveeF, 4, 4),

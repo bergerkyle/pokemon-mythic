@@ -7329,32 +7329,6 @@ static const u16 sDittoTeachableLearnset[] = {
 
 #if P_FAMILY_EEVEE
 static const u16 sEeveeTeachableLearnset[] = {
-    MOVE_ATTRACT,
-    MOVE_BODY_SLAM,
-    MOVE_CALM_MIND,
-    MOVE_DIG,
-    MOVE_DOUBLE_EDGE,
-    MOVE_DOUBLE_TEAM,
-    MOVE_ENDURE,
-    MOVE_FACADE,
-    MOVE_IRON_TAIL,
-    MOVE_MUD_SLAP,
-    MOVE_PROTECT,
-    MOVE_RAIN_DANCE,
-    MOVE_REFLECT,
-    MOVE_REST,
-    MOVE_ROAR,
-    MOVE_SHADOW_BALL,
-    MOVE_SLEEP_TALK,
-    MOVE_SNORE,
-    MOVE_SUNNY_DAY,
-    MOVE_SWAGGER,
-    MOVE_SWIFT,
-    MOVE_TOXIC,
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sEeveePartnerTeachableLearnset[] = {
     MOVE_BLIZZARD,
     MOVE_CALM_MIND,
     MOVE_DREAM_EATER,
