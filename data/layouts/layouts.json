@@ -4470,6 +4470,16 @@
       "secondary_tileset": "gTileset_village",
       "border_filepath": "data/layouts/LittlerootTown_ProfessorBirchsLab_2/border.bin",
       "blockdata_filepath": "data/layouts/LittlerootTown_ProfessorBirchsLab_2/map.bin"
+    },
+    {
+      "id": "LAYOUT_ROUTE30",
+      "name": "Route30_Layout",
+      "width": 58,
+      "height": 58,
+      "primary_tileset": "gTileset_general2",
+      "secondary_tileset": "gTileset_cherrygrove",
+      "border_filepath": "data/layouts/Route30/border.bin",
+      "blockdata_filepath": "data/layouts/Route30/map.bin"
     }
   ]
 }

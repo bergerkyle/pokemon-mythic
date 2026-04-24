@@ -4006,6 +4006,17 @@ static const struct LevelUpMove sEeveeLevelUpLearnset[] = {
     LEVEL_UP_MOVE(45, MOVE_TRUMP_CARD),
     LEVEL_UP_END
 };
+static const struct LevelUpMove sEeveeStarterLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
+    LEVEL_UP_MOVE( 8, MOVE_SAND_ATTACK),
+    LEVEL_UP_MOVE(16, MOVE_GROWL),
+    LEVEL_UP_MOVE(23, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE(30, MOVE_BITE),
+    LEVEL_UP_MOVE(36, MOVE_FOCUS_ENERGY),
+    LEVEL_UP_MOVE(42, MOVE_TAKE_DOWN),
+    LEVEL_UP_END
+};
 
 static const struct LevelUpMove sVaporeonLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_HELPING_HAND),

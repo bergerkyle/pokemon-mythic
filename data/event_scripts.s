@@ -1183,3 +1183,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/apricorn_tree.inc"
 
 	.include "data/maps/LittlerootTown_ProfessorBirchsLab_2/scripts.inc"
+
+	.include "data/maps/Route30/scripts.inc"

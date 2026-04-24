@@ -34,7 +34,8 @@
     "gMapGroup_IndoorRoute113",
     "gMapGroup_IndoorRoute123",
     "gMapGroup_IndoorRoute119",
-    "gMapGroup_IndoorRoute124"
+    "gMapGroup_IndoorRoute124",
+    "gMapGroup_Johto"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -47,7 +48,6 @@
     "SootopolisCity",
     "EverGrandeCity",
     "LittlerootTown",
-    "CherrygroveCity",
     "OldaleTown",
     "DewfordTown",
     "LavaridgeTown",
@@ -629,5 +629,9 @@
   ],
   "gMapGroup_IndoorRoute124": [
     "Route124_DivingTreasureHuntersHouse"
+  ],
+  "gMapGroup_Johto": [
+    "Route30",
+    "CherrygroveCity"
   ]
 }

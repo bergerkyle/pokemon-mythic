@@ -130,7 +130,7 @@
     },
     {
       "id": "MAPSEC_ROUTE_101",
-      "name": "ROUTE 101",
+      "name": "Route 30",
       "x": 4,
       "y": 10,
       "width": 1,
@@ -1232,7 +1232,8 @@
       "height": 1
     },
     {
-      "id": "MAPSEC_CHERRYGROVE_CITY"
+      "id": "MAPSEC_CHERRYGROVE_CITY",
+      "name": "Cherrygrove City"
     }
   ]
 }
