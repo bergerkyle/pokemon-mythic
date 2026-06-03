@@ -4480,6 +4480,16 @@
       "secondary_tileset": "gTileset_cherrygrove",
       "border_filepath": "data/layouts/Route30/border.bin",
       "blockdata_filepath": "data/layouts/Route30/map.bin"
+    },
+    {
+      "id": "LAYOUT_ROUTE31",
+      "name": "Route31_Layout",
+      "width": 60,
+      "height": 23,
+      "primary_tileset": "gTileset_general2",
+      "secondary_tileset": "gTileset_cherrygrove",
+      "border_filepath": "data/layouts/Route31/border.bin",
+      "blockdata_filepath": "data/layouts/Route31/map.bin"
     }
   ]
 }
